@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: dark light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* THEME TOKENS - DARK CYBERPUNK (DEFAULT) */
+  --bg-base: #06080d;
+  --bg-subtle: #0b0f17;
+  --bg-surface: #111722;
+  --bg-card: rgba(13, 19, 31, 0.72);
+  --bg-card-hover: rgba(20, 29, 48, 0.85);
+  --bg-glass: rgba(10, 15, 26, 0.75);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-bright: rgba(255, 255, 255, 0.16);
+  --border-neon-orange: rgba(255, 122, 0, 0.4);
+  --border-neon-cyan: rgba(0, 240, 255, 0.4);
+
+  --text-main: #f3f4f6;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  --accent-orange: #ff7a00;
+  --accent-orange-glow: rgba(255, 122, 0, 0.35);
+  --accent-cyan: #00f0ff;
+  --accent-cyan-glow: rgba(0, 240, 255, 0.35);
+  --accent-purple: #a855f7;
+  --accent-purple-glow: rgba(168, 85, 247, 0.35);
+  --accent-green: #10b981;
+  --accent-green-glow: rgba(16, 185, 129, 0.35);
+
+  --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow-orange: 0 0 25px rgba(255, 122, 0, 0.25);
+  --shadow-glow-cyan: 0 0 25px rgba(0, 240, 255, 0.25);
+}
+
+/* LIGHT MINIMAL THEME OVERRIDE */
+[data-theme='light'],
+.theme-light {
+  --bg-base: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.82);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-bright: rgba(0, 0, 0, 0.15);
+  --border-neon-orange: rgba(230, 81, 0, 0.4);
+  --border-neon-cyan: rgba(0, 151, 167, 0.4);
+
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+
+  --accent-orange: #ea580c;
+  --accent-orange-glow: rgba(234, 88, 12, 0.25);
+  --accent-cyan: #0284c7;
+  --accent-cyan-glow: rgba(2, 132, 199, 0.25);
+  --accent-purple: #7c3aed;
+  --accent-purple-glow: rgba(124, 58, 237, 0.25);
+  --accent-green: #059669;
+  --accent-green-glow: rgba(5, 150, 105, 0.25);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-glow-orange: 0 4px 20px rgba(234, 88, 12, 0.15);
+  --shadow-glow-cyan: 0 4px 20px rgba(2, 132, 199, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+[data-theme='light'] html {
+  color-scheme: light;
+}
+
+body {
+  min-width: 320px;
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Cyber Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-orange);
+}
+
+::selection {
+  background: var(--accent-orange);
+  color: #ffffff;
+}
