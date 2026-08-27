@@ -14,7 +14,7 @@ function Experience() {
       company: 'Best Computel Service Garut',
       role: 'IT Support Specialist & Computer Technician',
       location: 'Garut, Indonesia',
-      status: 'Active Position',
+      status: 'ACTIVE POSITION',
       description:
         'Spearheading computer diagnostics, hardware repairs, system deployment, service administration, warranty lifecycle handling, and digital workflow optimization.',
       responsibilities: [
@@ -26,12 +26,12 @@ function Experience() {
         'Customer Technical Consultation & After-Service Advisory Support',
       ],
       tools: [
-        'Hardware Tools',
+        'Hardware Diagnostics',
         'Windows/Linux OS',
-        'BIOS/UEFI Utilities',
+        'BIOS/UEFI Tools',
         'AppSheet',
         'Google Workspace',
-        'Multimeter & Testers',
+        'Multimeters & Testers',
       ],
     },
   ]
@@ -40,11 +40,12 @@ function Experience() {
     <section id="experience" className="experience-section modern-section">
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="tag-pulse" />
-          <span>CAREER TIMELINE</span>
+          <span className="mono-tag">[ 04 // EXPERIENCE ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">CAREER RECORD</span>
         </div>
         <h2 className="section-title-modern">
-          Professional <span className="text-gradient">Experience & Track Record</span>
+          Professional Track Record
         </h2>
         <p className="section-subtitle">
           Years of hands-on expertise troubleshooting critical hardware and streamlining operational management.
@@ -52,38 +53,32 @@ function Experience() {
       </div>
 
       <div className="experience-timeline-container">
-        {/* Glowing vertical line */}
-        <div className="timeline-tracer-line" aria-hidden="true">
-          <div className="tracer-glow-node top" />
-          <div className="tracer-glow-node bottom" />
-        </div>
+        {/* Timeline line */}
+        <div className="timeline-tracer-line" aria-hidden="true" />
 
         <div className="experience-timeline-list">
           {experiences.map((exp, index) => (
             <div className="timeline-item-wrapper" key={index}>
               {/* Timeline Marker */}
               <div className="timeline-node-marker">
-                <div className="node-outer-ring">
-                  <div className="node-inner-dot" />
-                </div>
-                <div className="node-glow" />
+                <div className="node-inner-dot" />
               </div>
 
-              {/* 3D Timeline Content Card */}
-              <TiltCard className="timeline-tilt-card" maxTilt={8} scale={1.01}>
+              {/* Timeline Card */}
+              <TiltCard className="timeline-tilt-card" maxTilt={5} scale={1.01}>
                 <div className="timeline-card-inner">
                   {/* Top Bar */}
                   <div className="timeline-top-bar">
                     <div className="timeline-meta-left">
-                      <div className="timeline-period-badge">
-                        <Calendar size={14} className="text-orange" />
+                      <div className="timeline-period-badge text-highlight-pill">
+                        <Calendar size={13} />
                         <span>{exp.period}</span>
                       </div>
                       <span className="timeline-status-pill">{exp.status}</span>
                     </div>
 
                     <div className="timeline-location">
-                      <MapPin size={14} className="text-cyan" />
+                      <MapPin size={13} />
                       <span>{exp.location}</span>
                     </div>
                   </div>
@@ -91,9 +86,9 @@ function Experience() {
                   {/* Header */}
                   <div className="timeline-header-info">
                     <h3 className="timeline-company-name">
-                      <Briefcase size={20} className="text-orange" /> {exp.company}
+                      <Briefcase size={18} /> {exp.company}
                     </h3>
-                    <h4 className="timeline-role-title">{exp.role}</h4>
+                    <h4 className="timeline-role-title">// {exp.role}</h4>
                   </div>
 
                   <p className="timeline-summary-text">{exp.description}</p>
@@ -101,12 +96,12 @@ function Experience() {
                   {/* Responsibilities list */}
                   <div className="timeline-duties-wrapper">
                     <h5 className="duties-title">
-                      <Award size={15} className="text-cyan" /> Key Responsibilities & Achievements:
+                      <Award size={14} /> [ KEY RESPONSIBILITIES & ACHIEVEMENTS ]
                     </h5>
                     <div className="duties-grid">
                       {exp.responsibilities.map((resp, rIdx) => (
                         <div key={rIdx} className="duty-item">
-                          <CheckCircle2 size={16} className="duty-check-icon text-green" />
+                          <CheckCircle2 size={14} className="duty-check-icon" />
                           <span>{resp}</span>
                         </div>
                       ))}
@@ -115,7 +110,7 @@ function Experience() {
 
                   {/* Tech / Tool tags */}
                   <div className="timeline-tools-footer">
-                    <span className="tools-label">Tools & Frameworks:</span>
+                    <span className="tools-label">TOOLS & UTILITIES:</span>
                     <div className="tools-tags-list">
                       {exp.tools.map((tool, tIdx) => (
                         <span key={tIdx} className="tool-tag-pill">

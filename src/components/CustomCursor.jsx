@@ -81,15 +81,15 @@ function CustomCursor({ isDark = true }) {
           left: position.x,
           width: isClicking ? '6px' : '8px',
           height: isClicking ? '6px' : '8px',
-          backgroundColor: isDark ? '#00f0ff' : '#0097a7',
+          backgroundColor: isDark ? '#ffffff' : '#09090b',
           borderRadius: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
           zIndex: 99999,
           boxShadow: isDark
-            ? '0 0 12px #00f0ff, 0 0 24px rgba(0, 240, 255, 0.6)'
-            : '0 0 8px rgba(0, 151, 167, 0.5)',
-          transition: 'width 0.15s ease, height 0.15s ease, background-color 0.3s ease',
+            ? '0 0 10px rgba(255, 255, 255, 0.8)'
+            : '0 0 6px rgba(0, 0, 0, 0.3)',
+          transition: 'width 0.15s ease, height 0.15s ease, background-color 0.25s ease',
         }}
       />
 
@@ -100,28 +100,28 @@ function CustomCursor({ isDark = true }) {
           position: 'fixed',
           top: trailingPos.y,
           left: trailingPos.x,
-          width: isHovering ? '54px' : isClicking ? '28px' : '36px',
-          height: isHovering ? '54px' : isClicking ? '28px' : '36px',
+          width: isHovering ? '50px' : isClicking ? '26px' : '34px',
+          height: isHovering ? '50px' : isClicking ? '26px' : '34px',
           border: `1.5px solid ${
             isHovering
               ? isDark
-                ? '#ff7a00'
-                : '#e65100'
+                ? '#ffffff'
+                : '#09090b'
               : isDark
-              ? 'rgba(0, 240, 255, 0.5)'
-              : 'rgba(0, 151, 167, 0.4)'
+              ? 'rgba(255, 255, 255, 0.45)'
+              : 'rgba(9, 9, 11, 0.35)'
           }`,
           backgroundColor: isHovering
             ? isDark
-              ? 'rgba(255, 122, 0, 0.08)'
-              : 'rgba(230, 81, 0, 0.06)'
+              ? 'rgba(255, 255, 255, 0.12)'
+              : 'rgba(9, 9, 11, 0.08)'
             : 'transparent',
           borderRadius: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
           zIndex: 99998,
           transition:
-            'width 0.25s cubic-bezier(0.1, 0.9, 0.2, 1), height 0.25s cubic-bezier(0.1, 0.9, 0.2, 1), border-color 0.2s ease, background-color 0.2s ease',
+            'width 0.22s cubic-bezier(0.1, 0.9, 0.2, 1), height 0.22s cubic-bezier(0.1, 0.9, 0.2, 1), border-color 0.2s ease, background-color 0.2s ease',
         }}
       />
     </>

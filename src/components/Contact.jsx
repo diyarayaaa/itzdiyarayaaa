@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 
 // Clean GitHub SVG Icon
-function GithubIcon({ size = 24, className = '' }) {
+function GithubIcon({ size = 20, className = '' }) {
   return (
     <svg
       width={size}
@@ -46,10 +46,10 @@ function Contact() {
       const y = (rect.top + rect.height / 2) / window.innerHeight
 
       confetti({
-        particleCount: 45,
-        spread: 60,
+        particleCount: 35,
+        spread: 50,
         origin: { x, y },
-        colors: ['#ff7a00', '#00f0ff', '#8b5cf6', '#ffffff'],
+        colors: ['#ffffff', '#a1a1aa', '#71717a', '#27272a'],
         disableForReducedMotion: true,
       })
     }
@@ -62,8 +62,8 @@ function Contact() {
   const contacts = [
     {
       key: 'email',
-      icon: <Mail size={24} className="contact-icon-svg text-orange" />,
-      label: 'Direct Email',
+      icon: <Mail size={20} className="contact-icon-svg" />,
+      label: 'DIRECT_EMAIL',
       value: 'wandiadityaputra25@gmail.com',
       link: 'mailto:wandiadityaputra25@gmail.com',
       copyValue: 'wandiadityaputra25@gmail.com',
@@ -71,8 +71,8 @@ function Contact() {
     },
     {
       key: 'whatsapp',
-      icon: <Phone size={24} className="contact-icon-svg text-green" />,
-      label: 'WhatsApp Chat',
+      icon: <Phone size={20} className="contact-icon-svg" />,
+      label: 'WHATSAPP_CHAT',
       value: '+62 813 1848 9243',
       link: 'https://wa.me/6281318489243',
       copyValue: '+6281318489243',
@@ -80,8 +80,8 @@ function Contact() {
     },
     {
       key: 'github',
-      icon: <GithubIcon size={24} className="contact-icon-svg text-cyan" />,
-      label: 'GitHub Profile',
+      icon: <GithubIcon size={20} className="contact-icon-svg" />,
+      label: 'GITHUB_PROFILE',
       value: 'github.com/diyarayaaa',
       link: 'https://github.com/diyarayaaa',
       copyValue: 'https://github.com/diyarayaaa',
@@ -93,119 +93,134 @@ function Contact() {
     <section id="contact" className="contact-section modern-section">
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="tag-pulse" />
-          <span>CONNECT & COLLABORATE</span>
+          <span className="mono-tag">[ 05 // CONNECT ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">COMMUNICATION CHANNELS</span>
         </div>
         <h2 className="section-title-modern">
-          Let's Build Something <span className="text-gradient">Extraordinary</span>
+          Initiate Collaboration
         </h2>
         <p className="section-subtitle">
-          Have an IT infrastructure challenge, a software project, or an exciting career opportunity? Let's connect!
+          Have an IT infrastructure challenge, a software project, or an exciting career opportunity? Let's connect.
         </p>
       </div>
 
       <div className="contact-modern-layout">
-        {/* LEFT: 3D Invitation Hero Card */}
-        <TiltCard className="contact-invitation-card" maxTilt={8} scale={1.01}>
-          <div className="invitation-glass-inner">
-            <div className="invitation-status-badge">
-              <span className="live-status-dot" />
-              <span>ONLINE & RESPONSIVE</span>
+        {/* LEFT: Invitation Card */}
+        <TiltCard className="contact-invitation-card" maxTilt={5} scale={1.01}>
+          <div className="card-glass-body">
+            <div className="card-header-bar">
+              <span className="window-title">[ DOC_COMMS // INVITATION ]</span>
+              <div className="window-badge text-highlight-pill">
+                <span className="live-status-dot" />
+                <span>ONLINE &amp; AVAILABLE</span>
+              </div>
             </div>
 
-            <h3 className="invitation-heading">
-              Ready to discuss hardware diagnostics, systems administration, or web engineering?
-            </h3>
+            <div className="invitation-main-content">
+              <h3 className="invitation-heading">
+                Ready to discuss hardware diagnostics, systems administration, or digital platforms?
+              </h3>
 
-            <p className="invitation-text">
-              Whether you need hands-on technical troubleshooting, automated inventory & RMA workflows, or modern digital platforms, I am ready to bring dedication and technical excellence to the table.
-            </p>
+              <p className="invitation-text">
+                Whether you need hands-on technical troubleshooting, automated inventory &amp; RMA workflows, or modern web software, I am ready to bring engineering rigor and dedication.
+              </p>
+            </div>
 
             <div className="invitation-cta-box">
               <a
                 href="mailto:wandiadityaputra25@gmail.com"
-                className="btn-modern primary-glow full-width"
+                className="btn-solid-white full-width"
               >
-                <Send size={18} />
-                <span>Start a Conversation</span>
-                <div className="btn-glow-layer" />
+                <Send size={16} />
+                <span>START A CONVERSATION</span>
               </a>
             </div>
 
             <div className="contact-perks-list">
               <div className="perk-item">
-                <Sparkles size={16} className="text-orange" />
+                <Sparkles size={14} />
                 <span>Fast response time within 24 hours</span>
               </div>
               <div className="perk-item">
-                <Globe2 size={16} className="text-cyan" />
-                <span>Available for on-site & remote collaborations</span>
+                <Globe2 size={14} />
+                <span>Available for on-site (Garut/Bandung) &amp; remote collaboration</span>
               </div>
             </div>
           </div>
         </TiltCard>
 
-        {/* RIGHT: 3D Contact Cards Grid */}
-        <div className="contact-cards-column">
-          {contacts.map((c) => (
-            <TiltCard key={c.key} className="contact-channel-card" maxTilt={10} scale={1.02}>
-              <div className="channel-card-inner">
-                <div className="channel-icon-box">
-                  {c.icon}
-                  <div className="channel-glow-bubble" />
-                </div>
+        {/* RIGHT: Contact Channels Document Card */}
+        <TiltCard className="contact-channels-card" maxTilt={5} scale={1.01}>
+          <div className="card-glass-body">
+            <div className="card-header-bar">
+              <span className="window-title">[ DOC_COMMS // DIRECT CHANNELS ]</span>
+              <div className="window-badge text-highlight-pill">3 ROUTES ACTIVE</div>
+            </div>
 
-                <div className="channel-info">
-                  <span className="channel-label">{c.label}</span>
-                  <a
-                    href={c.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="channel-value-link"
-                  >
-                    {c.value}
-                  </a>
-                </div>
+            <div className="contact-channels-list">
+              {contacts.map((c) => (
+                <div key={c.key} className="channel-card-inner">
+                  <div className="channel-icon-box">
+                    {c.icon}
+                  </div>
 
-                <div className="channel-actions">
-                  {/* Copy Button */}
-                  <button
-                    className={`channel-action-btn copy-btn ${
-                      copiedKey === c.key ? 'copied' : ''
-                    }`}
-                    onClick={(e) => handleCopy(c.copyValue, c.key, e)}
-                    title="Copy to clipboard"
-                    aria-label={`Copy ${c.label}`}
-                  >
-                    {copiedKey === c.key ? (
-                      <>
-                        <Check size={16} className="text-green" />
-                        <span className="action-tooltip">Copied! 🎉</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={16} />
-                        <span className="action-tooltip">Copy</span>
-                      </>
-                    )}
-                  </button>
+                  <div className="channel-info">
+                    <span className="channel-label">[ {c.label} ]</span>
+                    <a
+                      href={c.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="channel-value-link"
+                    >
+                      {c.value}
+                    </a>
+                  </div>
 
-                  {/* External Open Link */}
-                  <a
-                    href={c.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="channel-action-btn open-btn"
-                    title={c.actionLabel}
-                    aria-label={c.actionLabel}
-                  >
-                    <ExternalLink size={16} />
-                  </a>
+                  <div className="channel-actions">
+                    {/* Copy Button */}
+                    <button
+                      className={`channel-action-btn copy-btn ${
+                        copiedKey === c.key ? 'copied' : ''
+                      }`}
+                      onClick={(e) => handleCopy(c.copyValue, c.key, e)}
+                      title="Copy to clipboard"
+                      aria-label={`Copy ${c.label}`}
+                    >
+                      {copiedKey === c.key ? (
+                        <>
+                          <Check size={14} className="text-green" />
+                          <span className="action-tooltip">COPIED!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={14} />
+                          <span className="action-tooltip">COPY</span>
+                        </>
+                      )}
+                    </button>
+
+                    {/* External Open Link */}
+                    <a
+                      href={c.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="channel-action-btn open-btn"
+                      title={c.actionLabel}
+                      aria-label={c.actionLabel}
+                    >
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </TiltCard>
-          ))}
-        </div>
+              ))}
+            </div>
+
+            <div className="contact-channels-footer">
+              <span className="channel-footer-note">[ DIRECT INBOX &amp; INSTANT COMMUNICATION ]</span>
+            </div>
+          </div>
+        </TiltCard>
       </div>
     </section>
   )

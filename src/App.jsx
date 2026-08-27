@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import BestComputelCaseStudy from './components/BestComputelCaseStudy'
 import ThreeBackground from './components/ThreeBackground'
 import CustomCursor from './components/CustomCursor'
+import { useScrollReveal } from './hooks/useScrollReveal'
 
 import './App.css'
 
@@ -38,6 +39,7 @@ class ErrorBoundary extends Component {
 
 function App() {
   const [showCaseStudy, setShowCaseStudy] = useState(false)
+  useScrollReveal()
   const [isDark, setIsDark] = useState(() => {
     try {
       const saved = localStorage.getItem('diyara_theme')

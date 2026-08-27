@@ -3,7 +3,6 @@ import TiltCard from './TiltCard'
 import {
   ArrowUpRight,
   Sparkles,
-  Star,
   CheckCircle2,
 } from 'lucide-react'
 
@@ -17,7 +16,7 @@ function Projects({ onCaseStudy }) {
       category: 'system',
       categoryLabel: 'Enterprise System Administration',
       description:
-        'A comprehensive, centralized service and warranty management system designed to streamline incoming device intakes, repair stage tracking, RMA distributor logistics, customer records, and real-time operational KPI monitoring.',
+        'A comprehensive, centralized service and warranty management system designed to streamline incoming device intakes, repair stage tracking, RMA distributor logistics, customer records, and real-time operational monitoring.',
       features: [
         'Real-time Service Status & RMA Lifecycle Tracking',
         'Distributor & Warranty Claim Automation',
@@ -32,20 +31,20 @@ function Projects({ onCaseStudy }) {
         'Cloud Database',
       ],
       featured: true,
-      badge: 'Featured Case Study',
-      stats: '100% Operational Adoption',
+      badge: 'FEATURED CASE STUDY',
+      stats: '100% OPERATIONAL ADOPTION',
     },
     {
       id: 'portfolio-cyber',
-      title: 'Personal 3D Cyber Portfolio',
+      title: 'Personal Neo-Brutalist Engineering Portfolio',
       category: 'web',
       categoryLabel: 'Modern Web Application',
       description:
-        'An ultra-modern, responsive portfolio platform engineered with Three.js 3D WebGL particle networks, CSS 3D perspective tilt physics, cyberpunk glassmorphism design system, and custom interactions.',
+        'A high-performance, dark minimalist portfolio engineered with Three.js 3D WebGL particle networks, CSS 3D perspective physics, monochrome tech docs design system, and custom interactions.',
       features: [
-        'Interactive 3D WebGL Particle Constellation Background',
-        'Custom 3D Perspective Card Tilt Physics Engine',
-        'Dual Cyber Dark / Modern Light Theme Engine',
+        'Interactive 3D WebGL Particle Constellation Engine',
+        'Custom 3D Perspective Card Tilt Physics',
+        'Dark Minimalist & Neo-Brutalist Tech Docs System',
         'Dynamic Role Animation & Interactive Contact Hub',
       ],
       technologies: [
@@ -57,8 +56,8 @@ function Projects({ onCaseStudy }) {
         'Canvas Confetti',
       ],
       featured: false,
-      badge: 'Interactive Experience',
-      stats: '60 FPS WebGL Rendering',
+      badge: 'INTERACTIVE PLATFORM',
+      stats: '60 FPS WEBGL RENDERING',
     },
   ]
 
@@ -75,14 +74,15 @@ function Projects({ onCaseStudy }) {
     <section id="projects" className="projects-section modern-section">
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="tag-pulse" />
-          <span>PORTFOLIO SHOWCASE</span>
+          <span className="mono-tag">[ 03 // PORTFOLIO ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">CASE STUDIES & SYSTEMS</span>
         </div>
         <h2 className="section-title-modern">
-          Featured <span className="text-gradient">Creations & Systems</span>
+          Featured Creations & Systems
         </h2>
         <p className="section-subtitle">
-          Real-world applications and digital infrastructure developed to solve tangible operational challenges.
+          Real-world applications and digital infrastructure engineered to solve tangible operational challenges.
         </p>
 
         {/* Filter buttons */}
@@ -94,7 +94,6 @@ function Projects({ onCaseStudy }) {
               onClick={() => setFilter(cat.id)}
             >
               <span>{cat.label}</span>
-              {filter === cat.id && <span className="filter-pill-glow" />}
             </button>
           ))}
         </div>
@@ -105,27 +104,24 @@ function Projects({ onCaseStudy }) {
           <TiltCard
             key={project.id}
             className={`modern-project-card ${project.featured ? 'featured-highlight' : ''}`}
-            maxTilt={10}
-            scale={1.02}
+            maxTilt={6}
+            scale={1.01}
           >
             <div className="project-card-glass">
               {/* Top Banner Bar */}
               <div className="project-top-row">
                 <div className="project-id-badge">
-                  <span className="id-bracket">[</span>
-                  <span className="id-number">0{index + 1}</span>
-                  <span className="id-bracket">]</span>
+                  <span className="id-tag text-highlight-pill">[ MOD_0{index + 1} ]</span>
                 </div>
 
                 <div className="project-badge-pill">
-                  {project.featured && <Star size={13} className="text-orange" />}
-                  <span>{project.badge}</span>
+                  <span className="project-badge-text">{project.badge}</span>
                 </div>
               </div>
 
               {/* Category & Title */}
               <div className="project-heading-block">
-                <span className="project-category-tag">{project.categoryLabel}</span>
+                <span className="project-category-tag">// {project.categoryLabel}</span>
                 <h3 className="project-main-title">{project.title}</h3>
               </div>
 
@@ -135,12 +131,12 @@ function Projects({ onCaseStudy }) {
               {/* Key Features */}
               <div className="project-features-list">
                 <h5 className="features-header">
-                  <Sparkles size={14} className="text-cyan" /> Key Highlights:
+                  <Sparkles size={13} /> [ KEY HIGHLIGHTS ]
                 </h5>
                 <div className="features-grid">
                   {project.features.map((feat, fIdx) => (
                     <div key={fIdx} className="feature-bullet">
-                      <CheckCircle2 size={14} className="feature-check text-green" />
+                      <CheckCircle2 size={13} className="feature-check" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -149,7 +145,7 @@ function Projects({ onCaseStudy }) {
 
               {/* Technologies */}
               <div className="project-tech-stack">
-                <span className="tech-stack-label">Stack:</span>
+                <span className="tech-stack-label">STACK:</span>
                 <div className="tech-stack-tags">
                   {project.technologies.map((tech, tIdx) => (
                     <span key={tIdx} className="tech-tag">
@@ -163,28 +159,27 @@ function Projects({ onCaseStudy }) {
               <div className="project-footer-actions">
                 {project.featured ? (
                   <button
-                    className="project-action-btn primary-action"
+                    className="btn-solid-white-sm"
                     onClick={() => {
                       if (onCaseStudy) {
                         onCaseStudy()
                       }
                     }}
                   >
-                    <span>Read Full Case Study</span>
-                    <ArrowUpRight size={18} />
-                    <div className="btn-glow-accent" />
+                    <span>READ CASE STUDY</span>
+                    <ArrowUpRight size={15} />
                   </button>
                 ) : (
                   <a
                     href="#home"
-                    className="project-action-btn secondary-action"
+                    className="btn-outline-box-sm"
                     onClick={(e) => {
                       e.preventDefault()
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                     }}
                   >
-                    <span>Active In View</span>
-                    <ArrowUpRight size={18} />
+                    <span>ACTIVE IN VIEW</span>
+                    <ArrowUpRight size={15} />
                   </a>
                 )}
 
@@ -193,10 +188,6 @@ function Projects({ onCaseStudy }) {
                   <span>{project.stats}</span>
                 </div>
               </div>
-
-              {/* Holographic Border Accents */}
-              <div className="card-cyber-accent top-right" />
-              <div className="card-cyber-accent bottom-left" />
             </div>
           </TiltCard>
         ))}

@@ -88,7 +88,7 @@ function TiltCard({
           }}
         />
       )}
-      <div style={{ transform: 'translateZ(25px)', transformStyle: 'preserve-3d', width: '100%' }}>
+      <div style={{ transform: 'translateZ(25px)', transformStyle: 'preserve-3d', width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         {children}
       </div>
     </div>

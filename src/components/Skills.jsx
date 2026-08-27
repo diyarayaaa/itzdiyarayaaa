@@ -22,9 +22,8 @@ function Skills() {
   const skillData = [
     {
       category: 'hardware',
-      title: 'IT Support & Hardware Engineering',
-      icon: <Wrench size={26} className="skill-cat-icon text-orange" />,
-      accentColor: 'orange',
+      title: <>IT Support &amp;<br />Hardware Engineering</>,
+      icon: <Wrench size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'PC & Laptop Troubleshooting', level: 95 },
         { name: 'Hardware Diagnostics & Repair', level: 90 },
@@ -35,9 +34,8 @@ function Skills() {
     },
     {
       category: 'network',
-      title: 'Network Infrastructure',
-      icon: <Network size={26} className="skill-cat-icon text-cyan" />,
-      accentColor: 'cyan',
+      title: <>Network Infrastructure</>,
+      icon: <Network size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'LAN / WAN Architecture', level: 85 },
         { name: 'Router & Switch Configuration', level: 82 },
@@ -48,12 +46,11 @@ function Skills() {
     },
     {
       category: 'software',
-      title: 'Software & Frontend Development',
-      icon: <Code2 size={26} className="skill-cat-icon text-purple" />,
-      accentColor: 'purple',
+      title: <>Software &amp; Web<br /> Development</>,
+      icon: <Code2 size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'React.js & Modern JavaScript', level: 84 },
-        { name: 'HTML5 / CSS3 / Glassmorphism', level: 90 },
+        { name: 'HTML5 / CSS3 / Web Architecture', level: 90 },
         { name: 'Vite & Frontend Tooling', level: 85 },
         { name: 'Git & GitHub Version Control', level: 88 },
         { name: 'RESTful APIs & Asynchronous JS', level: 80 },
@@ -61,15 +58,14 @@ function Skills() {
     },
     {
       category: 'admin',
-      title: 'Systems & Workflow Administration',
-      icon: <Database size={26} className="skill-cat-icon text-green" />,
-      accentColor: 'green',
+      title: <>Systems &amp; Workflow<br />Administration</>,
+      icon: <Database size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'Google Sheets Advanced Formulas', level: 92 },
         { name: 'AppSheet Low-Code Development', level: 90 },
         { name: 'RMA & Warranty Tracking Systems', level: 95 },
         { name: 'Service Database Management', level: 88 },
-        { name: 'Customer Technical Support', level: 92 },
+        { name: 'Customer Technical Advisory', level: 92 },
       ],
     },
   ]
@@ -83,14 +79,15 @@ function Skills() {
     <section id="skills" className="skills-section modern-section">
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="tag-pulse" />
-          <span>CAPABILITIES & ARSENAL</span>
+          <span className="mono-tag">[ 02 // CAPABILITIES ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">TECHNICAL ARSENAL</span>
         </div>
         <h2 className="section-title-modern">
-          Technical Skills & <span className="text-gradient">Core Competencies</span>
+          Technical Skills & Competencies
         </h2>
         <p className="section-subtitle">
-          A proven synthesis of hardware diagnostic precision, networking knowledge, and modern digital development.
+          A proven synthesis of hardware diagnostic precision, network engineering, and modern digital platforms.
         </p>
 
         {/* Category Filter Tabs */}
@@ -102,7 +99,6 @@ function Skills() {
               onClick={() => setActiveTab(tab.id)}
             >
               <span>{tab.label}</span>
-              {activeTab === tab.id && <span className="tab-active-glow" />}
             </button>
           ))}
         </div>
@@ -112,19 +108,18 @@ function Skills() {
         {filteredData.map((category, index) => (
           <TiltCard
             key={index}
-            className={`skill-category-card accent-${category.accentColor}`}
-            maxTilt={10}
-            scale={1.02}
+            className="skill-category-card"
+            maxTilt={6}
+            scale={1.01}
           >
             <div className="skill-card-inner">
               {/* Header */}
               <div className="skill-card-header">
                 <div className="skill-icon-bubble">
                   {category.icon}
-                  <div className="icon-glow-bubble" />
                 </div>
                 <div className="skill-header-meta">
-                  <span className="skill-meta-label">DISCIPLINE 0{index + 1}</span>
+                  <span className="skill-meta-label">[ DISCIPLINE 0{index + 1} ]</span>
                   <h3 className="skill-card-title">{category.title}</h3>
                 </div>
               </div>
@@ -134,19 +129,17 @@ function Skills() {
                 {category.skills.map((skill, sIdx) => (
                   <div key={sIdx} className="skill-meter-row">
                     <div className="skill-meter-label">
-                      <span>{skill.name}</span>
-                      <span className="skill-percent-badge">{skill.level}%</span>
+                      <span className="skill-name">{skill.name}</span>
+                      <span className="skill-percent-badge text-highlight-pill">{skill.level}%</span>
                     </div>
                     <div className="skill-meter-track">
                       <div
                         className="skill-meter-fill"
                         style={{
+                          '--skill-target': `${skill.level}%`,
                           width: `${skill.level}%`,
-                          transitionDelay: `${sIdx * 80}ms`,
                         }}
-                      >
-                        <span className="meter-glow-head" />
-                      </div>
+                      />
                     </div>
                   </div>
                 ))}
@@ -155,7 +148,7 @@ function Skills() {
               {/* Card Footer Chip */}
               <div className="skill-card-footer">
                 <span className="skill-chip-tag">
-                  <CheckCircle size={13} className="text-green" /> Verified Competency
+                  <CheckCircle size={12} /> [ VERIFIED COMPETENCY ]
                 </span>
               </div>
             </div>

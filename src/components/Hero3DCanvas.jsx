@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function Hero3DCanvas({ isDark = true }) {
@@ -43,12 +43,12 @@ function Hero3DCanvas({ isDark = true }) {
     // 1. Central Holographic Icosahedron
     const coreGeo = new THREE.IcosahedronGeometry(3.6, 1)
     const coreMat = new THREE.MeshStandardMaterial({
-      color: isDark ? 0x07090e : 0xffffff,
-      emissive: isDark ? 0xff7a00 : 0xe65100,
-      emissiveIntensity: isDark ? 0.35 : 0.2,
+      color: isDark ? 0x111111 : 0xffffff,
+      emissive: isDark ? 0xffffff : 0x222222,
+      emissiveIntensity: isDark ? 0.25 : 0.1,
       wireframe: true,
-      roughness: 0.2,
-      metalness: 0.8,
+      roughness: 0.1,
+      metalness: 0.9,
     })
     const coreMesh = new THREE.Mesh(coreGeo, coreMat)
     coreGroup.add(coreMesh)
@@ -56,41 +56,41 @@ function Hero3DCanvas({ isDark = true }) {
     // Inner Glowing Core Sphere
     const innerGeo = new THREE.SphereGeometry(2.2, 24, 24)
     const innerMat = new THREE.MeshBasicMaterial({
-      color: isDark ? 0x00f0ff : 0x0097a7,
+      color: isDark ? 0xffffff : 0x000000,
       wireframe: true,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.25,
     })
     const innerMesh = new THREE.Mesh(innerGeo, innerMat)
     coreGroup.add(innerMesh)
 
-    // 2. Orbital Cyber Rings
-    const ring1Geo = new THREE.TorusGeometry(5.2, 0.08, 16, 100)
+    // 2. Orbital Tech Rings
+    const ring1Geo = new THREE.TorusGeometry(5.2, 0.04, 16, 100)
     const ring1Mat = new THREE.MeshBasicMaterial({
-      color: isDark ? 0xff7a00 : 0xe65100,
+      color: isDark ? 0xffffff : 0x000000,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.6,
     })
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat)
     ring1.rotation.x = Math.PI / 3
     coreGroup.add(ring1)
 
-    const ring2Geo = new THREE.TorusGeometry(6.0, 0.06, 16, 100)
+    const ring2Geo = new THREE.TorusGeometry(6.0, 0.03, 16, 100)
     const ring2Mat = new THREE.MeshBasicMaterial({
-      color: isDark ? 0x00f0ff : 0x0097a7,
+      color: isDark ? 0x888888 : 0x555555,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.5,
     })
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat)
     ring2.rotation.y = Math.PI / 4
     ring2.rotation.x = -Math.PI / 6
     coreGroup.add(ring2)
 
-    const ring3Geo = new THREE.TorusGeometry(6.8, 0.05, 16, 100)
+    const ring3Geo = new THREE.TorusGeometry(6.8, 0.03, 16, 100)
     const ring3Mat = new THREE.MeshBasicMaterial({
-      color: isDark ? 0x8b5cf6 : 0x6200ea,
+      color: isDark ? 0x555555 : 0x888888,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.4,
     })
     const ring3 = new THREE.Mesh(ring3Geo, ring3Mat)
     ring3.rotation.z = Math.PI / 3
@@ -103,10 +103,10 @@ function Hero3DCanvas({ isDark = true }) {
     const satNodes = []
     const satCount = 6
     for (let i = 0; i < satCount; i++) {
-      const satGeo = new THREE.OctahedronGeometry(0.35, 0)
+      const satGeo = new THREE.OctahedronGeometry(0.3, 0)
       const satMat = new THREE.MeshBasicMaterial({
-        color: i % 2 === 0 ? 0xff7a00 : 0x00f0ff,
-        wireframe: false,
+        color: 0xffffff,
+        wireframe: true,
       })
       const satMesh = new THREE.Mesh(satGeo, satMat)
       const angle = (i / satCount) * Math.PI * 2
@@ -121,16 +121,12 @@ function Hero3DCanvas({ isDark = true }) {
     }
 
     // 4. Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2)
     scene.add(ambientLight)
 
-    const orangeLight = new THREE.PointLight(0xff7a00, 3, 30)
-    orangeLight.position.set(10, 10, 10)
-    scene.add(orangeLight)
-
-    const cyanLight = new THREE.PointLight(0x00f0ff, 3, 30)
-    cyanLight.position.set(-10, -10, 10)
-    scene.add(cyanLight)
+    const whitePointLight = new THREE.PointLight(0xffffff, 2.5, 30)
+    whitePointLight.position.set(10, 10, 10)
+    scene.add(whitePointLight)
 
     // Mouse Tracking
     let targetRotX = 0

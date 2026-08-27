@@ -1,83 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Eagle+Lake&family=Fauna+Satu&display=swap');
 
 :root {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
+  font-family: 'Fauna Satu', Georgia, serif;
+  line-height: 1.8;
   font-weight: 400;
 
   color-scheme: dark light;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* THEME TOKENS - DARK CYBERPUNK (DEFAULT) */
-  --bg-base: #06080d;
-  --bg-subtle: #0b0f17;
-  --bg-surface: #111722;
-  --bg-card: rgba(13, 19, 31, 0.72);
-  --bg-card-hover: rgba(20, 29, 48, 0.85);
-  --bg-glass: rgba(10, 15, 26, 0.75);
+  /* THEME TOKENS — DARK MINIMALIST / NEO-BRUTALIST TECH DOCS (DEFAULT) */
+  --bg-base: #000000;
+  --bg-pitch: #000000;
+  --bg-subtle: #080808;
+  --bg-surface: #0e0e10;
+  --bg-card: #0a0a0c;
+  --bg-card-hover: #121216;
+  --bg-glass: rgba(0, 0, 0, 0.9);
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-bright: rgba(255, 255, 255, 0.16);
-  --border-neon-orange: rgba(255, 122, 0, 0.4);
-  --border-neon-cyan: rgba(0, 240, 255, 0.4);
+  /* CRISP DARK MINIMALIST BORDERS */
+  --border-subtle: #222226;
+  --border-bright: #33333a;
+  --border-contrast: #52525b;
+  --border-active: #ffffff;
 
-  --text-main: #f3f4f6;
-  --text-muted: #94a3b8;
-  --text-subtle: #64748b;
+  /* MONOCHROME HIGH-CONTRAST TEXT PALETTE */
+  --text-main: #ffffff;
+  --text-muted: #ffffff;
+  --text-subtle: #d4d4d8;
+  --text-dark: #000000;
 
-  --accent-orange: #ff7a00;
-  --accent-orange-glow: rgba(255, 122, 0, 0.35);
-  --accent-cyan: #00f0ff;
-  --accent-cyan-glow: rgba(0, 240, 255, 0.35);
+  /* ACCENTS */
+  --accent-white: #ffffff;
+  --accent-neutral: #d4d4d8;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
+  --accent-cyan: #38bdf8;
   --accent-purple: #a855f7;
-  --accent-purple-glow: rgba(168, 85, 247, 0.35);
-  --accent-green: #10b981;
-  --accent-green-glow: rgba(16, 185, 129, 0.35);
 
-  --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  /* STRICT 2-FONT COMPOSITION: CINZEL + FAUNA SATU (EAGLE LAKE FOR HERO) */
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-hero: 'Eagle Lake', 'Cinzel', Georgia, serif;
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-body: 'Fauna Satu', Georgia, serif;
+  --font-mono: 'Cinzel', Georgia, serif;
 
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --shadow-glow-orange: 0 0 25px rgba(255, 122, 0, 0.25);
-  --shadow-glow-cyan: 0 0 25px rgba(0, 240, 255, 0.25);
+  /* SHADOWS */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.8);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.9);
 }
 
-/* LIGHT MINIMAL THEME OVERRIDE */
+/* LIGHT THEME (SUPER CRISP & ULTRA-READABLE MONOCHROME) */
 [data-theme='light'],
 .theme-light {
-  --bg-base: #f8fafc;
-  --bg-subtle: #f1f5f9;
-  --bg-surface: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.82);
-  --bg-card-hover: rgba(255, 255, 255, 0.95);
-  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-base: #ffffff;
+  --bg-pitch: #fafafa;
+  --bg-subtle: #f4f4f5;
+  --bg-surface: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafafa;
+  --bg-glass: rgba(255, 255, 255, 0.94);
 
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-bright: rgba(0, 0, 0, 0.15);
-  --border-neon-orange: rgba(230, 81, 0, 0.4);
-  --border-neon-cyan: rgba(0, 151, 167, 0.4);
+  --border-subtle: #e4e4e7;
+  --border-bright: #cbd5e1;
+  --border-contrast: #94a3b8;
+  --border-active: #09090b;
 
-  --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-subtle: #64748b;
+  --text-main: #09090b;
+  --text-muted: #09090b;
+  --text-subtle: #3f3f46;
+  --text-dark: #ffffff;
 
-  --accent-orange: #ea580c;
-  --accent-orange-glow: rgba(234, 88, 12, 0.25);
-  --accent-cyan: #0284c7;
-  --accent-cyan-glow: rgba(2, 132, 199, 0.25);
-  --accent-purple: #7c3aed;
-  --accent-purple-glow: rgba(124, 58, 237, 0.25);
-  --accent-green: #059669;
-  --accent-green-glow: rgba(5, 150, 105, 0.25);
+  --accent-white: #09090b;
+  --accent-neutral: #27272a;
 
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
-  --shadow-glow-orange: 0 4px 20px rgba(234, 88, 12, 0.15);
-  --shadow-glow-cyan: 0 4px 20px rgba(2, 132, 199, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -89,6 +89,7 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  background-color: var(--bg-base);
 }
 
 [data-theme='light'] html {
@@ -100,29 +101,57 @@ body {
   background-color: var(--bg-base);
   color: var(--text-main);
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: var(--font-body);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Custom Cyber Scrollbar */
+/* TECH DOCS BACKGROUND GRID TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme='light'] body::before {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+/* MINIMALIST SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-base);
+  border-left: 1px solid var(--border-subtle);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 4px;
+  background: var(--border-contrast);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-orange);
+  background: var(--accent-white);
 }
 
 ::selection {
-  background: var(--accent-orange);
+  background: #ffffff;
+  color: #000000;
+}
+
+[data-theme='light'] ::selection {
+  background: #09090b;
   color: #ffffff;
 }

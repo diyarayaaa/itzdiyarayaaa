@@ -1,5 +1,5 @@
 import TiltCard from './TiltCard'
-import { ArrowLeft, Sparkles } from 'lucide-react'
+import { ArrowLeft, Sparkles, CheckCircle2 } from 'lucide-react'
 import '../styles/BestComputelCaseStudy.css'
 
 function BestComputelCaseStudy({ onBack }) {
@@ -7,21 +7,19 @@ function BestComputelCaseStudy({ onBack }) {
     <section className="case-study-page">
       {/* BACK BUTTON */}
       <button className="case-study-back" onClick={onBack}>
-        <ArrowLeft size={18} />
+        <ArrowLeft size={16} />
         <span>Back to Projects</span>
       </button>
 
       {/* HERO */}
       <div className="case-study-hero">
-        <div className="case-study-label">
-          <Sparkles size={14} className="text-orange" />
-          <span>CASE STUDY · SYSTEM ADMINISTRATION</span>
+        <div className="section-tag">
+          <span className="mono-tag">[ CASE STUDY // SYSTEM ADMINISTRATION ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub text-highlight-pill">OPERATIONAL DEPLOYMENT</span>
         </div>
 
-        <h1>
-          Best Computel Service
-          <span> & RMA Management System</span>
-        </h1>
+        <h1>Best Computel Service &amp; RMA Management System</h1>
 
         <p className="case-study-intro">
           A centralized service and warranty management system developed to organize
@@ -39,9 +37,11 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* OVERVIEW */}
       <div className="case-study-section">
-        <div className="case-study-label">01 · OVERVIEW</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 01 // OVERVIEW ]</span>
+        </div>
 
-        <h2>From manual records to a centralized system.</h2>
+        <h2>From manual records to a centralized system</h2>
 
         <p>
           Before the system was developed, managing incoming devices, service records,
@@ -62,12 +62,14 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* PROBLEM */}
       <div className="case-study-section">
-        <div className="case-study-label">02 · THE PROBLEM</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 02 // THE PROBLEM ]</span>
+        </div>
 
-        <h2>The challenge was not just recording data.</h2>
+        <h2>The challenge was not just recording data</h2>
 
         <div className="case-study-grid">
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Manual Recording</h3>
               <p>
@@ -77,7 +79,7 @@ function BestComputelCaseStudy({ onBack }) {
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Memory Dependency</h3>
               <p>
@@ -87,7 +89,7 @@ function BestComputelCaseStudy({ onBack }) {
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Scattered Information</h3>
               <p>
@@ -97,7 +99,7 @@ function BestComputelCaseStudy({ onBack }) {
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Manual Reporting</h3>
               <p>
@@ -111,9 +113,11 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* SOLUTION */}
       <div className="case-study-section">
-        <div className="case-study-label">03 · THE SOLUTION</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 03 // THE SOLUTION ]</span>
+        </div>
 
-        <h2>A connected workflow for service and RMA operations.</h2>
+        <h2>A connected workflow for service and RMA operations</h2>
 
         <p>
           The solution combines AppSheet as the operational interface, Google Sheets as
@@ -152,9 +156,11 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* BARANG MASUK */}
       <div className="case-study-section">
-        <div className="case-study-label">04 · DEVICE INTAKE</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 04 // DEVICE INTAKE ]</span>
+        </div>
 
-        <h2>Barang Masuk & Tanda Terima</h2>
+        <h2>Barang Masuk &amp; Tanda Terima</h2>
 
         <p>
           When a customer brings a device to Best Computel, the device is first recorded
@@ -167,7 +173,7 @@ function BestComputelCaseStudy({ onBack }) {
           and process type.
         </p>
 
-        <TiltCard className="case-study-tilt-wrap" maxTilt={8} scale={1.01}>
+        <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
           <div className="case-study-card featured-card">
             <h3>From AppSheet input to a digital receipt</h3>
             <p>
@@ -191,7 +197,7 @@ function BestComputelCaseStudy({ onBack }) {
               e.target.parentElement.style.display = 'none'
             }}
           />
-          <p>AppSheet Device Intake</p>
+          <p>[ SCREENSHOT // APPSHEET DEVICE INTAKE ]</p>
         </div>
 
         <div className="case-study-screenshot">
@@ -202,13 +208,15 @@ function BestComputelCaseStudy({ onBack }) {
               e.target.parentElement.style.display = 'none'
             }}
           />
-          <p>Digital Service & RMA Receipt</p>
+          <p>[ SCREENSHOT // DIGITAL SERVICE &amp; RMA RECEIPT ]</p>
         </div>
       </div>
 
       {/* SERVICE */}
       <div className="case-study-section">
-        <div className="case-study-label">05 · SERVICE WORKFLOW</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 05 // SERVICE WORKFLOW ]</span>
+        </div>
 
         <h2>Service Process</h2>
 
@@ -227,9 +235,11 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* WARRANTY */}
       <div className="case-study-section">
-        <div className="case-study-label">06 · WARRANTY WORKFLOW</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 06 // WARRANTY WORKFLOW ]</span>
+        </div>
 
-        <h2>Warranty & Distributor Tracking</h2>
+        <h2>Warranty &amp; Distributor Tracking</h2>
 
         <p>
           Warranty devices can be tracked from the moment they are sent to the
@@ -253,7 +263,9 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* SERVICE KELUAR */}
       <div className="case-study-section">
-        <div className="case-study-label">07 · EXTERNAL SERVICE</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 07 // EXTERNAL SERVICE ]</span>
+        </div>
 
         <h2>Service Keluar</h2>
 
@@ -277,9 +289,11 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* DASHBOARD */}
       <div className="case-study-section">
-        <div className="case-study-label">08 · MONITORING</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 08 // MONITORING ]</span>
+        </div>
 
-        <h2>Dashboard & Operational Monitoring</h2>
+        <h2>Dashboard &amp; Operational Monitoring</h2>
 
         <p>
           A dashboard was developed to provide a quick overview of the current
@@ -288,7 +302,7 @@ function BestComputelCaseStudy({ onBack }) {
         </p>
 
         <div className="case-study-grid">
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Service in Progress</h3>
               <p>
@@ -297,14 +311,14 @@ function BestComputelCaseStudy({ onBack }) {
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>RMA at Distributor</h3>
               <p>Track devices that are currently outside Best Computel.</p>
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
               <h3>Completed Devices</h3>
               <p>
@@ -313,23 +327,25 @@ function BestComputelCaseStudy({ onBack }) {
             </div>
           </TiltCard>
 
-          <TiltCard className="case-study-tilt-wrap" maxTilt={10} scale={1.02}>
+          <TiltCard className="case-study-tilt-wrap" maxTilt={5} scale={1.01}>
             <div className="case-study-card">
-              <h3>KPI & Calendar</h3>
+              <h3>KPI &amp; Calendar</h3>
               <p>Provide operational summaries and schedule visibility.</p>
             </div>
           </TiltCard>
         </div>
 
         <div className="screenshot-placeholder">
-          <span>SYSTEM DASHBOARD</span>
+          <span>[ MODULE_VIEW // REAL-TIME MONITORING ]</span>
           <p>Best Computel Live Operational Dashboard</p>
         </div>
       </div>
 
       {/* AUTOMATION */}
       <div className="case-study-section">
-        <div className="case-study-label">09 · AUTOMATION</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 09 // AUTOMATION ]</span>
+        </div>
 
         <h2>Automated WhatsApp Reporting</h2>
 
@@ -344,14 +360,16 @@ function BestComputelCaseStudy({ onBack }) {
         </p>
 
         <div className="screenshot-placeholder">
-          <span>AUTOMATION MODULE</span>
+          <span>[ MODULE_VIEW // AUTO-DISPATCHER ]</span>
           <p>Automated WhatsApp RMA Report Dispatcher</p>
         </div>
       </div>
 
       {/* IMPACT */}
       <div className="case-study-section">
-        <div className="case-study-label">10 · IMPACT</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 10 // IMPACT &amp; VALUE ]</span>
+        </div>
 
         <h2>Less remembering. More control.</h2>
 
@@ -383,7 +401,9 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* TECHNOLOGY */}
       <div className="case-study-section">
-        <div className="case-study-label">11 · TECHNOLOGY</div>
+        <div className="section-tag">
+          <span className="mono-tag">[ 11 // TECH STACK ]</span>
+        </div>
 
         <h2>Technology Stack</h2>
 
@@ -399,7 +419,7 @@ function BestComputelCaseStudy({ onBack }) {
 
       {/* FOOTER */}
       <div className="case-study-end">
-        <h2>Built from a real operational problem.</h2>
+        <h2>Built from a real operational problem</h2>
 
         <p>
           This project represents the process of turning a real-world operational
@@ -407,7 +427,7 @@ function BestComputelCaseStudy({ onBack }) {
         </p>
 
         <button className="case-study-back" onClick={onBack}>
-          <ArrowLeft size={18} />
+          <ArrowLeft size={16} />
           <span>Back to Projects</span>
         </button>
       </div>

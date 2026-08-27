@@ -21,26 +21,26 @@ function About() {
 
   const infoGrid = [
     {
-      icon: <User size={20} className="info-icon text-orange" />,
-      label: 'Full Name',
+      icon: <User size={18} className="info-icon" />,
+      label: 'FULL NAME',
       value: 'Wandi Aditya Putra',
       sub: 'Known as Diyara',
     },
     {
-      icon: <GraduationCap size={20} className="info-icon text-cyan" />,
-      label: 'Education',
+      icon: <GraduationCap size={18} className="info-icon" />,
+      label: 'EDUCATION',
       value: 'S1 Information Systems',
-      sub: 'Computer & Network Background',
+      sub: 'Computer & Network Focus',
     },
     {
-      icon: <Briefcase size={20} className="info-icon text-purple" />,
-      label: 'Specialty',
+      icon: <Briefcase size={18} className="info-icon" />,
+      label: 'SPECIALTY',
       value: 'IT Support & Technician',
       sub: 'Service & System Admin',
     },
     {
-      icon: <MapPin size={20} className="info-icon text-orange" />,
-      label: 'Location',
+      icon: <MapPin size={18} className="info-icon" />,
+      label: 'LOCATION',
       value: 'Garut / West Java',
       sub: 'Indonesia',
     },
@@ -50,11 +50,12 @@ function About() {
     <section id="about" className="about-section modern-section">
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="tag-pulse" />
-          <span>ABOUT ME</span>
+          <span className="mono-tag">[ 01 // ABOUT ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">ENGINEERING DOSSIER</span>
         </div>
         <h2 className="section-title-modern">
-          Engineering Solutions Through <span className="text-gradient">Hardware & Code</span>
+          Engineering Solutions Through Hardware & Code
         </h2>
         <p className="section-subtitle">
           Bridging the gap between physical IT infrastructure and intelligent digital software systems.
@@ -62,22 +63,18 @@ function About() {
       </div>
 
       <div className="about-modern-grid">
-        {/* LEFT: 3D Story Card */}
-        <TiltCard className="about-story-card" maxTilt={8} scale={1.01}>
+        {/* LEFT: Story Card */}
+        <TiltCard className="about-story-card" maxTilt={6} scale={1.01}>
           <div className="card-glass-body">
             <div className="card-header-bar">
-              <div className="window-dots">
-                <span className="dot dot-red" />
-                <span className="dot dot-yellow" />
-                <span className="dot dot-green" />
-              </div>
-              <span className="window-title">diyara_profile.sys</span>
-              <div className="window-badge">ACTIVE</div>
+              <span className="window-title">[ DOCS_REF // BIOGRAPHY ]</span>
+              <div className="window-badge text-highlight-pill">STATUS: ACTIVE</div>
             </div>
 
             <div className="about-story-text">
+              <h3 className="story-serif-heading">Wandi Aditya Putra</h3>
               <p className="lead-paragraph">
-                I am <strong className="highlight-text">Wandi Aditya Putra</strong>, an Information Systems student who blends deep hands-on expertise in computer hardware with modern software development skills.
+                An <span className="text-highlight-pill">Information Systems</span> student who blends deep hands-on expertise in <span className="text-highlight-pill">Hardware Diagnostics</span> with modern software engineering.
               </p>
 
               <p>
@@ -85,19 +82,19 @@ function About() {
               </p>
 
               <p>
-                My goal is to continuously innovate by designing streamlined digital workflows, administrative databases, and responsive web applications that eliminate operational bottlenecks.
+                My objective is to design streamlined digital workflows, administrative databases, and responsive web applications that eliminate operational bottlenecks.
               </p>
             </div>
 
             {/* Core Competencies Checklist */}
             <div className="about-competencies">
               <h4 className="competencies-title">
-                <Layers size={16} className="text-orange" /> Core Highlights
+                <Layers size={15} /> [ CORE COMPETENCIES ]
               </h4>
               <div className="competencies-grid">
                 {highlights.map((item, idx) => (
                   <div key={idx} className="competency-item">
-                    <CheckCircle2 size={16} className="check-icon" />
+                    <CheckCircle2 size={15} className="check-icon" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -106,41 +103,52 @@ function About() {
           </div>
         </TiltCard>
 
-        {/* RIGHT: 3D Info Matrix */}
-        <div className="about-matrix-container">
-          <div className="about-info-matrix">
-            {infoGrid.map((item, idx) => (
-              <TiltCard key={idx} className="info-matrix-card" maxTilt={12} scale={1.03}>
-                <div className="info-card-inner">
+        {/* RIGHT: Operator Matrix & Philosophy Card */}
+        <TiltCard className="about-identity-card" maxTilt={6} scale={1.01}>
+          <div className="card-glass-body">
+            <div className="card-header-bar">
+              <span className="window-title">[ DOCS_REF // OPERATOR MATRIX ]</span>
+              <div className="window-badge text-highlight-pill">VERIFIED: ID</div>
+            </div>
+
+            {/* 2x2 Info Grid Matrix */}
+            <div className="about-info-matrix">
+              {infoGrid.map((item, idx) => (
+                <div key={idx} className="info-card-inner">
                   <div className="info-icon-wrapper">
                     {item.icon}
-                    <div className="icon-glow" />
                   </div>
                   <div className="info-card-text">
-                    <span className="info-card-label">{item.label}</span>
+                    <span className="info-card-label">[ {item.label} ]</span>
                     <strong className="info-card-value">{item.value}</strong>
                     <span className="info-card-sub">{item.sub}</span>
                   </div>
                 </div>
-              </TiltCard>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* Interactive Tech HUD Terminal */}
-          <TiltCard className="about-hud-terminal" maxTilt={6} scale={1.01}>
-            <div className="terminal-inner">
-              <div className="terminal-top">
-                <Terminal size={16} className="text-cyan" />
-                <span>terminal://system_metrics</span>
-              </div>
-              <div className="terminal-code">
-                <p><span className="t-green">status:</span> "ready_for_dispatch"</p>
-                <p><span className="t-cyan">mode:</span> "problem_solver & continuous_learner"</p>
-                <p><span className="t-orange">focus:</span> ["Hardware_Engineering", "System_Admin", "Fullstack_Web"]</p>
+            {/* Work Ethic & Focus Section */}
+            <div className="about-philosophy-section">
+              <h4 className="competencies-title">
+                <Terminal size={15} /> [ WORK ETHIC &amp; FOCUS ]
+              </h4>
+              <div className="about-philosophy-list">
+                <div className="philosophy-item">
+                  <span className="philo-label">STATUS //</span>
+                  <span className="philo-val">Available for Projects &amp; Full-time Roles</span>
+                </div>
+                <div className="philosophy-item">
+                  <span className="philo-label">MINDSET //</span>
+                  <span className="philo-val">Analytical Problem Solver &amp; Continuous Learner</span>
+                </div>
+                <div className="philosophy-item">
+                  <span className="philo-label">FOCUS //</span>
+                  <span className="philo-val">Hardware Engineering • System Admin • Web Apps</span>
+                </div>
               </div>
             </div>
-          </TiltCard>
-        </div>
+          </div>
+        </TiltCard>
       </div>
     </section>
   )

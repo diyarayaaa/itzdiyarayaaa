@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { Sun, Moon, Menu, X, Terminal } from 'lucide-react'
 
 function Navbar({ onNavigate, isDark, onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -8,7 +8,7 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         setScrolled(true)
       } else {
         setScrolled(false)
@@ -50,6 +50,44 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
 
   return (
     <header className={`modern-navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
+      {/* TOP MARQUEE TICKER BAR */}
+      <div className="top-marquee-bar" aria-label="System status ticker">
+        <div className="marquee-track">
+          <div className="marquee-content">
+            <span className="marquee-item">
+              <span className="ticker-dot-live" />
+              <span className="ticker-status">SYSTEM STATUS: ONLINE</span>
+            </span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">SPECIALIZATION: IT HARDWARE & DIAGNOSTICS</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">GARUT, WEST JAVA — OPEN FOR WORK & COLLABORATION</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">TECH STACK: REACT • APPSHEET • LINUX & WINDOWS SYS ADMIN</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">DIYARA ENGINEERING ARCHIVE V2.0</span>
+            <span className="marquee-sep">//</span>
+          </div>
+
+          <div className="marquee-content" aria-hidden="true">
+            <span className="marquee-item">
+              <span className="ticker-dot-live" />
+              <span className="ticker-status">SYSTEM STATUS: ONLINE</span>
+            </span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">SPECIALIZATION: IT HARDWARE & DIAGNOSTICS</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">GARUT, WEST JAVA — OPEN FOR WORK & COLLABORATION</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">TECH STACK: REACT • APPSHEET • LINUX & WINDOWS SYS ADMIN</span>
+            <span className="marquee-sep">//</span>
+            <span className="marquee-item">DIYARA ENGINEERING ARCHIVE V2.0</span>
+            <span className="marquee-sep">//</span>
+          </div>
+        </div>
+      </div>
+
+      {/* MAIN NAVBAR */}
       <nav className="modern-navbar">
         {/* LOGO */}
         <a
@@ -61,23 +99,17 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
           }}
         >
           <div className="brand-logo-icon">
-            <img
-              src={`${import.meta.env.BASE_URL}favicon.svg`}
-              alt="DIYARA logo"
-              onError={(e) => {
-                e.target.style.display = 'none'
-              }}
-            />
-            <div className="brand-glow" />
+            <Terminal size={15} />
           </div>
           <span className="brand-text">
-            DIYARA<span className="brand-dot">.</span>
+            DIYARA
           </span>
+          <span className="brand-subtag">DOCS_V2.0</span>
         </a>
 
         {/* DESKTOP NAV LINKS */}
         <div className="nav-links-dock">
-          {navItems.map((item) => (
+          {navItems.map((item, idx) => (
             <a
               key={item.id}
               href={`#${item.id}`}
@@ -87,8 +119,8 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
                 handleNavigation(item.id)
               }}
             >
-              {activeSection === item.id && <span className="active-indicator" />}
-              {item.label}
+              <span className="nav-item-num">0{idx + 1}.</span>
+              <span className="nav-item-name">{item.label}</span>
             </a>
           ))}
         </div>
@@ -102,17 +134,16 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
             title={`Switch to ${isDark ? 'Light' : 'Dark'} mode`}
           >
             {isDark ? (
-              <Sun className="theme-icon sun" size={18} />
+              <Sun className="theme-icon" size={15} />
             ) : (
-              <Moon className="theme-icon moon" size={18} />
+              <Moon className="theme-icon" size={15} />
             )}
-            <span className="theme-glow" />
           </button>
 
           {/* Quick status badge */}
           <div className="status-badge-pill desktop-only">
             <span className="status-dot-pulse" />
-            <span className="status-text">Open to Work</span>
+            <span className="status-text">AVAILABLE</span>
           </div>
 
           {/* MOBILE TOGGLE */}
@@ -122,7 +153,7 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
@@ -130,18 +161,21 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
       {/* MOBILE DRAWER */}
       <div className={`mobile-nav-drawer ${menuOpen ? 'open' : ''}`}>
         <div className="mobile-drawer-content">
+          <div className="mobile-drawer-header">
+            <span className="mono-doc-label">[ NAVIGATION DIRECTORY ]</span>
+          </div>
           {navItems.map((item, index) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              style={{ transitionDelay: `${index * 40}ms` }}
               className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}
               onClick={(e) => {
                 e.preventDefault()
                 handleNavigation(item.id)
               }}
             >
-              <span>0{index + 1}.</span> {item.label}
+              <span className="mobile-item-num">0{index + 1} //</span>
+              <span className="mobile-item-label">{item.label}</span>
             </a>
           ))}
 

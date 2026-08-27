@@ -12,27 +12,26 @@ function Footer() {
 
   return (
     <footer className="modern-footer">
-      <div className="footer-glow-bar" aria-hidden="true" />
-
       <div className="footer-content-container">
         {/* Brand & Tagline */}
         <div className="footer-brand-col">
           <div className="footer-brand-title">
             <span className="brand-dot-pulse" />
             <span className="footer-brand-name">
-              DIYARA<span className="text-orange">.</span>
+              DIYARA
             </span>
+            <span className="footer-brand-tag">[ DOCS_SYS ]</span>
           </div>
           <p className="footer-tagline">
-            Crafting reliable computer systems, diagnostics & modern interactive digital solutions.
+            Engineering reliable computer systems, diagnostics & modern interactive digital solutions.
           </p>
         </div>
 
         {/* Center: System Status */}
         <div className="footer-status-col">
           <div className="footer-status-pill">
-            <Terminal size={14} className="text-cyan" />
-            <span>Systems Normal // 60 FPS 3D WebGL Engine</span>
+            <Terminal size={13} />
+            <span>[ SYSTEM: OPERATIONAL // 60 FPS 3D ENGINE ]</span>
           </div>
           <p className="footer-copyright">
             © {currentYear} <strong>Wandi Aditya Putra</strong>. Built with React 19 & Three.js.
@@ -47,9 +46,8 @@ function Footer() {
             aria-label="Scroll to top of page"
             title="Scroll to Top"
           >
-            <ArrowUp size={18} />
-            <span>Top</span>
-            <div className="btn-glow-layer" />
+            <ArrowUp size={15} />
+            <span>TOP</span>
           </button>
         </div>
       </div>

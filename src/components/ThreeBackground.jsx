@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function ThreeBackground({ isDark = true }) {
@@ -45,9 +45,9 @@ function ThreeBackground({ isDark = true }) {
     const velocities = []
     const baseColors = new Float32Array(particleCount * 3)
 
-    const color1 = isDark ? new THREE.Color(0xff7a00) : new THREE.Color(0xe65100) // Orange
-    const color2 = isDark ? new THREE.Color(0x00f0ff) : new THREE.Color(0x0097a7) // Cyan
-    const color3 = isDark ? new THREE.Color(0x8b5cf6) : new THREE.Color(0x6200ea) // Purple
+    const color1 = isDark ? new THREE.Color(0xffffff) : new THREE.Color(0x000000)
+    const color2 = isDark ? new THREE.Color(0x888888) : new THREE.Color(0x555555)
+    const color3 = isDark ? new THREE.Color(0x444444) : new THREE.Color(0x888888)
 
     for (let i = 0; i < particleCount; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 140
@@ -55,9 +55,9 @@ function ThreeBackground({ isDark = true }) {
       positions[i * 3 + 2] = (Math.random() - 0.5) * 80
 
       velocities.push({
-        x: (Math.random() - 0.5) * 0.08,
-        y: (Math.random() - 0.5) * 0.08,
-        z: (Math.random() - 0.5) * 0.05,
+        x: (Math.random() - 0.5) * 0.06,
+        y: (Math.random() - 0.5) * 0.06,
+        z: (Math.random() - 0.5) * 0.04,
       })
 
       // Distribute colors
@@ -86,8 +86,8 @@ function ThreeBackground({ isDark = true }) {
       if (!ctx) return null
       const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
       gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
-      gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)')
-      gradient.addColorStop(0.8, 'rgba(255, 255, 255, 0.15)')
+      gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.6)')
+      gradient.addColorStop(0.8, 'rgba(255, 255, 255, 0.1)')
       gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
       ctx.fillStyle = gradient
       ctx.beginPath()
@@ -100,11 +100,11 @@ function ThreeBackground({ isDark = true }) {
     const circleTexture = createCircleTexture()
 
     const particleMaterial = new THREE.PointsMaterial({
-      size: 3.2,
+      size: 2.5,
       vertexColors: true,
       map: circleTexture,
       transparent: true,
-      opacity: isDark ? 0.85 : 0.65,
+      opacity: isDark ? 0.6 : 0.4,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
     })
@@ -112,7 +112,7 @@ function ThreeBackground({ isDark = true }) {
     const particleSystem = new THREE.Points(particleGeometry, particleMaterial)
     scene.add(particleSystem)
 
-    // Floating 3D Cyber Wireframe Geometries
+    // Floating 3D Tech Wireframe Geometries
     const floatingGroup = new THREE.Group()
     scene.add(floatingGroup)
 
@@ -124,15 +124,15 @@ function ThreeBackground({ isDark = true }) {
     ]
 
     const floatMeshes = []
-    const meshCount = window.innerWidth < 768 ? 3 : 7
+    const meshCount = window.innerWidth < 768 ? 3 : 6
 
     for (let i = 0; i < meshCount; i++) {
       const geom = geoTypes[i % geoTypes.length]
       const wireMat = new THREE.MeshBasicMaterial({
-        color: i % 2 === 0 ? (isDark ? 0xff7a00 : 0xe65100) : (isDark ? 0x00f0ff : 0x0097a7),
+        color: isDark ? 0x444444 : 0xcccccc,
         wireframe: true,
         transparent: true,
-        opacity: isDark ? 0.35 : 0.25,
+        opacity: isDark ? 0.2 : 0.15,
       })
 
       const mesh = new THREE.Mesh(geom, wireMat)
@@ -148,9 +148,9 @@ function ThreeBackground({ isDark = true }) {
       )
 
       const rotSpeed = {
-        x: (Math.random() - 0.5) * 0.015,
-        y: (Math.random() - 0.5) * 0.015,
-        z: (Math.random() - 0.5) * 0.015,
+        x: (Math.random() - 0.5) * 0.012,
+        y: (Math.random() - 0.5) * 0.012,
+        z: (Math.random() - 0.5) * 0.012,
       }
 
       floatingGroup.add(mesh)
@@ -158,7 +158,7 @@ function ThreeBackground({ isDark = true }) {
     }
 
     // Dynamic Connections Line Geometry
-    const maxLineConnections = 200
+    const maxLineConnections = 150
     const linePositions = new Float32Array(maxLineConnections * 6)
     const lineColors = new Float32Array(maxLineConnections * 6)
     const lineGeometry = new THREE.BufferGeometry()
@@ -168,7 +168,7 @@ function ThreeBackground({ isDark = true }) {
     const lineMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.22,
+      opacity: isDark ? 0.25 : 0.15,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
     })
