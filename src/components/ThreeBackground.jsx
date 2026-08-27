@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function ThreeBackground({ isDark = true }) {
@@ -7,6 +7,23 @@ function ThreeBackground({ isDark = true }) {
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
+
+    // Clear previous canvases if any
+    while (container.firstChild) {
+      container.removeChild(container.firstChild)
+    }
+
+    let renderer
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance',
+      })
+    } catch (e) {
+      console.warn('WebGL not supported or context creation failed:', e)
+      return
+    }
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene()
@@ -18,17 +35,12 @@ function ThreeBackground({ isDark = true }) {
     )
     camera.position.z = 80
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance',
-    })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(window.innerWidth, window.innerHeight)
     container.appendChild(renderer.domElement)
 
     // Particle Constellation System
-    const particleCount = window.innerWidth < 768 ? 70 : 160
+    const particleCount = window.innerWidth < 768 ? 60 : 150
     const positions = new Float32Array(particleCount * 3)
     const velocities = []
     const baseColors = new Float32Array(particleCount * 3)
@@ -71,6 +83,7 @@ function ThreeBackground({ isDark = true }) {
       canvas.width = 64
       canvas.height = 64
       const ctx = canvas.getContext('2d')
+      if (!ctx) return null
       const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
       gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
       gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)')
@@ -84,10 +97,12 @@ function ThreeBackground({ isDark = true }) {
       return texture
     }
 
+    const circleTexture = createCircleTexture()
+
     const particleMaterial = new THREE.PointsMaterial({
       size: 3.2,
       vertexColors: true,
-      map: createCircleTexture(),
+      map: circleTexture,
       transparent: true,
       opacity: isDark ? 0.85 : 0.65,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
@@ -109,7 +124,7 @@ function ThreeBackground({ isDark = true }) {
     ]
 
     const floatMeshes = []
-    const meshCount = window.innerWidth < 768 ? 4 : 8
+    const meshCount = window.innerWidth < 768 ? 3 : 7
 
     for (let i = 0; i < meshCount; i++) {
       const geom = geoTypes[i % geoTypes.length]
@@ -143,7 +158,7 @@ function ThreeBackground({ isDark = true }) {
     }
 
     // Dynamic Connections Line Geometry
-    const maxLineConnections = 250
+    const maxLineConnections = 200
     const linePositions = new Float32Array(maxLineConnections * 6)
     const lineColors = new Float32Array(maxLineConnections * 6)
     const lineGeometry = new THREE.BufferGeometry()
@@ -184,11 +199,11 @@ function ThreeBackground({ isDark = true }) {
 
     // Animation Loop
     let animationFrameId
-    let clock = new THREE.Clock()
+    const startTime = performance.now()
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
-      const elapsedTime = clock.getElapsedTime()
+      const elapsedTime = (performance.now() - startTime) * 0.001
 
       // Smooth mouse lerp
       mouseX += (targetMouseX - mouseX) * 0.05
@@ -284,16 +299,17 @@ function ThreeBackground({ isDark = true }) {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
 
-      if (container.contains(renderer.domElement)) {
+      if (container && renderer && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
 
       particleGeometry.dispose()
       particleMaterial.dispose()
+      if (circleTexture) circleTexture.dispose()
       lineGeometry.dispose()
       lineMaterial.dispose()
       geoTypes.forEach((g) => g.dispose())
-      renderer.dispose()
+      if (renderer) renderer.dispose()
     }
   }, [isDark])
 

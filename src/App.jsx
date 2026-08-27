@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import React, { useState, useEffect, Component } from 'react'
 
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -14,17 +14,47 @@ import CustomCursor from './components/CustomCursor'
 
 import './App.css'
 
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('ErrorBoundary caught an error:', error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || null
+    }
+    return this.props.children
+  }
+}
+
 function App() {
   const [showCaseStudy, setShowCaseStudy] = useState(false)
   const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('diyara_theme')
-    if (saved) return saved === 'dark'
+    try {
+      const saved = localStorage.getItem('diyara_theme')
+      if (saved) return saved === 'dark'
+    } catch {
+      // Safe fallback if localStorage is disabled in iframe/webview
+    }
     return true // Default dark cyberpunk
   })
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
-    localStorage.setItem('diyara_theme', isDark ? 'dark' : 'light')
+    try {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+      localStorage.setItem('diyara_theme', isDark ? 'dark' : 'light')
+    } catch {
+      // Safe fallback
+    }
   }, [isDark])
 
   const toggleTheme = () => {
@@ -53,9 +83,7 @@ function App() {
   }
 
   const handleNavigation = (sectionId) => {
-    // Kalau sedang di Case Study
     if (showCaseStudy) {
-      setPendingSection(sectionId)
       setShowCaseStudy(false)
 
       setTimeout(() => {
@@ -70,7 +98,6 @@ function App() {
       return
     }
 
-    // Kalau sedang di halaman utama
     const section = document.getElementById(sectionId)
     if (section) {
       section.scrollIntoView({
@@ -81,11 +108,15 @@ function App() {
 
   return (
     <div className={`app-root ${isDark ? 'theme-dark' : 'theme-light'}`}>
-      {/* 3D WebGL Background Canvas */}
-      <ThreeBackground isDark={isDark} />
+      {/* 3D WebGL Background Canvas with ErrorBoundary */}
+      <ErrorBoundary>
+        <ThreeBackground isDark={isDark} />
+      </ErrorBoundary>
 
       {/* Ambient Custom Cursor Follower */}
-      <CustomCursor isDark={isDark} />
+      <ErrorBoundary>
+        <CustomCursor isDark={isDark} />
+      </ErrorBoundary>
 
       {/* Glassmorphic Navigation */}
       <Navbar
@@ -100,7 +131,9 @@ function App() {
         </div>
       ) : (
         <main className="portfolio-main-content">
-          <Hero isDark={isDark} />
+          <ErrorBoundary>
+            <Hero isDark={isDark} />
+          </ErrorBoundary>
           <About />
           <Skills />
           <Experience />

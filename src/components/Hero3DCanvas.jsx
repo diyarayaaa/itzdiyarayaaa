@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function Hero3DCanvas({ isDark = true }) {
@@ -8,18 +8,30 @@ function Hero3DCanvas({ isDark = true }) {
     const mount = mountRef.current
     if (!mount) return
 
+    // Clear existing children
+    while (mount.firstChild) {
+      mount.removeChild(mount.firstChild)
+    }
+
     const width = mount.clientWidth || 360
     const height = mount.clientHeight || 360
+
+    let renderer
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+      })
+    } catch (e) {
+      console.warn('Hero3DCanvas WebGL init failed:', e)
+      return
+    }
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
     camera.position.z = 18
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-    })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(width, height)
     mount.appendChild(renderer.domElement)
@@ -143,23 +155,25 @@ function Hero3DCanvas({ isDark = true }) {
     mount.addEventListener('mouseleave', handleMouseLeave)
 
     const handleResize = () => {
-      if (!mount) return
+      if (!mount || !renderer) return
       const w = mount.clientWidth
       const h = mount.clientHeight
-      camera.aspect = w / h
-      camera.updateProjectionMatrix()
-      renderer.setSize(w, h)
+      if (w > 0 && h > 0) {
+        camera.aspect = w / h
+        camera.updateProjectionMatrix()
+        renderer.setSize(w, h)
+      }
     }
 
     window.addEventListener('resize', handleResize)
 
     // Animation Loop
     let animId
-    let clock = new THREE.Clock()
+    const startTime = performance.now()
 
     const animate = () => {
       animId = requestAnimationFrame(animate)
-      const elapsed = clock.getElapsedTime()
+      const elapsed = (performance.now() - startTime) * 0.001
 
       // Smooth rotation toward mouse
       mouseX += (targetRotX - mouseX) * 0.08
@@ -204,7 +218,7 @@ function Hero3DCanvas({ isDark = true }) {
       mount.removeEventListener('mousemove', handleMouseMove)
       mount.removeEventListener('mouseleave', handleMouseLeave)
 
-      if (mount.contains(renderer.domElement)) {
+      if (mount && renderer && mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement)
       }
 
@@ -218,7 +232,7 @@ function Hero3DCanvas({ isDark = true }) {
       ring2Mat.dispose()
       ring3Geo.dispose()
       ring3Mat.dispose()
-      renderer.dispose()
+      if (renderer) renderer.dispose()
     }
   }, [isDark])
 
