@@ -4,6 +4,29 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   0. GLOBAL SCROLL PROGRESS BAR (TOP HEADER ACCENT)
+   -------------------------------------------------------------------------- */
+.global-scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: transparent;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.global-scroll-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--acc, #F5C518);
+  transform-origin: left;
+  will-change: transform;
+  box-shadow: 0 0 10px rgba(245, 197, 24, 0.7), 0 0 20px rgba(245, 197, 24, 0.4);
+}
+
+/* --------------------------------------------------------------------------
    1. GLOBAL & LAYOUT UTILITIES
    -------------------------------------------------------------------------- */
 .app-root {
@@ -1553,23 +1576,169 @@
 }
 
 /* --------------------------------------------------------------------------
-   6. PROJECTS SECTION
+   6. PROJECTS SECTION (PINNED HORIZONTAL TRACK — RAFAEL KUROSAWA STYLE)
    -------------------------------------------------------------------------- */
+.projects-pinned-section {
+  position: relative;
+  width: 100%;
+  min-height: 280vh;
+}
+
+.projects-pinned-section.is-mobile-view {
+  min-height: auto;
+}
+
+.projects-sticky-frame {
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.projects-pinned-section.is-mobile-view .projects-sticky-frame {
+  position: relative;
+  top: 0;
+  height: auto;
+  overflow: visible;
+}
+
+.projects-header-wrapper {
+  padding-top: 15px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 0 !important;
+}
+
+.projects-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.projects-meta-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+/* PIN CONTROLS (COUNTER & DOTS & ARROWS) */
+.projects-pin-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-bright);
+  padding: 6px 14px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-sm);
+}
+
+.pin-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.pin-count-current {
+  color: var(--acc, #F5C518);
+  font-weight: 800;
+}
+
+.pin-count-sep {
+  color: var(--border-contrast);
+}
+
+.pin-count-total {
+  color: var(--text-subtle);
+}
+
+.pin-dots-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pin-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-bright);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pin-dot:hover {
+  background: var(--text-subtle);
+  transform: scale(1.2);
+}
+
+.pin-dot.is-active {
+  background: var(--acc, #F5C518);
+  width: 24px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
+}
+
+.pin-arrow-btns {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pin-arrow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pin-arrow-btn:hover:not(:disabled) {
+  background: var(--accent-white);
+  color: var(--text-dark);
+  border-color: var(--accent-white);
+}
+
+.pin-arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .projects-filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .project-filter-btn {
   background: var(--bg-surface);
   border: 1px solid var(--border-bright);
   border-radius: 2px;
-  padding: 8px 16px;
-  min-height: 38px;
+  padding: 6px 14px;
+  min-height: 34px;
   font-family: var(--font-heading);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--text-muted);
@@ -1586,18 +1755,46 @@
   border-color: var(--accent-white);
 }
 
-.projects-modern-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: 20px;
+/* TRACK VIEWPORT & HORIZONTAL TRACK */
+.projects-track-viewport {
+  position: relative;
   width: 100%;
-  align-items: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px var(--section-padding-x, 4%) 20px;
+  overflow: hidden;
 }
 
-.modern-project-card {
-  height: 100%;
+.projects-pinned-section.is-mobile-view .projects-track-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px var(--section-padding-x, 4%);
+}
+
+.projects-horizontal-track {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  gap: 28px;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects-pinned-section.is-mobile-view .projects-horizontal-track {
+  transition: none;
+}
+
+.projects-horizontal-track .modern-project-card {
+  width: clamp(340px, 42vw, 560px);
+  min-width: clamp(340px, 42vw, 560px);
+  height: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.modern-project-card.is-active-project {
+  border-color: var(--border-contrast);
 }
 
 .project-card-glass {
@@ -1636,7 +1833,7 @@
   font-family: var(--font-heading);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--text-subtle);
+  color: var(--acc, #F5C518);
   letter-spacing: 0.06em;
 }
 
@@ -1710,7 +1907,7 @@
 }
 
 .feature-check {
-  color: var(--text-main);
+  color: var(--acc, #F5C518);
   flex-shrink: 0;
   margin-top: 3px;
 }
@@ -1776,43 +1973,135 @@
   background: var(--accent-green);
 }
 
-/* --------------------------------------------------------------------------
-   7. EXPERIENCE SECTION
-   -------------------------------------------------------------------------- */
-.experience-timeline-container {
-  position: relative;
-  max-width: 1000px;
+/* END OF TRACK CUE CARD */
+.projects-end-card {
+  width: 320px;
+  min-width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-bright);
+  border-radius: 4px;
+  padding: 32px 24px;
+  text-align: left;
 }
 
-.timeline-tracer-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 8px;
-  width: 1px;
-  background: var(--border-bright);
-}
-
-.experience-timeline-list {
+.end-card-inner {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-left: 36px;
+  gap: 12px;
 }
 
-.timeline-item-wrapper {
-  position: relative;
+.end-card-tag {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--acc, #F5C518);
+  letter-spacing: 0.1em;
 }
 
-.timeline-node-marker {
+.end-card-inner h4 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.end-card-inner p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.projects-track-progress-bar {
   position: absolute;
-  left: -33px;
-  top: 22px;
-  width: 11px;
-  height: 11px;
-  background: var(--bg-base);
-  border: 2px solid var(--text-main);
-  border-radius: 50%;
+  bottom: 0;
+  left: var(--section-padding-x, 4%);
+  right: var(--section-padding-x, 4%);
+  height: 2px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.projects-track-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--acc, #F5C518);
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   7. EXPERIENCE SECTION (STICKY STACKING CARDS — RAFAEL KUROSAWA STYLE)
+   -------------------------------------------------------------------------- */
+.experience-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.stack-guide-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-bright);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--acc, #F5C518);
+}
+
+.experience-stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  max-width: 1080px;
+  margin: 20px 0 60px;
+}
+
+.experience-stack-item {
+  position: sticky;
+  will-change: transform;
+  transition: transform 0.3s ease;
+}
+
+.studio-stack-card {
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.exp-index-chip {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.exp-category-pill {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--acc, #F5C518);
+  background: rgba(245, 197, 24, 0.1);
+  border: 1px solid rgba(245, 197, 24, 0.25);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.timeline-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .timeline-card-inner {

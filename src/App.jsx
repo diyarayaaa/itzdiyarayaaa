@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from 'react'
 
 import Navbar from './components/Navbar'
+import ScrollProgressBar from './components/ScrollProgressBar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -110,6 +111,9 @@ function App() {
 
   return (
     <div className={`app-root ${isDark ? 'theme-dark' : 'theme-light'}`}>
+      {/* Global Top Scroll Progress Indicator */}
+      <ScrollProgressBar />
+
       {/* 3D WebGL Background Canvas with ErrorBoundary */}
       <ErrorBoundary>
         <ThreeBackground isDark={isDark} />
