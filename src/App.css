@@ -1258,8 +1258,11 @@
 
 .telemetry-pills {
   display: flex;
-  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .telemetry-tag {

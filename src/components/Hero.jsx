@@ -5,7 +5,6 @@ import TiltCard from './TiltCard'
 import {
   ArrowRight,
   ShieldCheck,
-  Cpu,
   Code2,
   ChevronDown,
   CornerDownRight,
@@ -159,14 +158,6 @@ function Hero({ isDark = true }) {
                   <div className="badge-text-group">
                     <span className="badge-title">IT Support</span>
                     <span className="badge-sub">Hardware &amp; RMA</span>
-                  </div>
-                </div>
-
-                <div className="floating-tech-badge badge-bottom-right">
-                  <Cpu size={14} className="badge-icon" />
-                  <div className="badge-text-group">
-                    <span className="badge-title">Diagnostics</span>
-                    <span className="badge-sub">PC Troubleshooting</span>
                   </div>
                 </div>
 

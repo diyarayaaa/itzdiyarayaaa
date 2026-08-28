@@ -85,10 +85,17 @@ function ThreeBackground({ isDark = true }) {
       const ctx = canvas.getContext('2d')
       if (!ctx) return null
       const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
-      gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.6)')
-      gradient.addColorStop(0.8, 'rgba(255, 255, 255, 0.1)')
-      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+      if (isDark) {
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
+        gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.6)')
+        gradient.addColorStop(0.8, 'rgba(255, 255, 255, 0.1)')
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+      } else {
+        gradient.addColorStop(0, 'rgba(20, 20, 25, 0.9)')
+        gradient.addColorStop(0.3, 'rgba(40, 40, 50, 0.5)')
+        gradient.addColorStop(0.8, 'rgba(60, 60, 70, 0.1)')
+        gradient.addColorStop(1, 'rgba(80, 80, 90, 0)')
+      }
       ctx.fillStyle = gradient
       ctx.beginPath()
       ctx.arc(32, 32, 30, 0, Math.PI * 2)
@@ -100,11 +107,11 @@ function ThreeBackground({ isDark = true }) {
     const circleTexture = createCircleTexture()
 
     const particleMaterial = new THREE.PointsMaterial({
-      size: 2.5,
+      size: isDark ? 2.5 : 3.0,
       vertexColors: true,
       map: circleTexture,
       transparent: true,
-      opacity: isDark ? 0.6 : 0.4,
+      opacity: isDark ? 0.6 : 0.5,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
     })
