@@ -2,14 +2,13 @@ import { useEffect } from 'react'
 
 /**
  * Global Scroll Reveal Controller using IntersectionObserver.
- * Observes all elements matching `.reveal-on-scroll` or `.reveal-group`
+ * Observes sections and elements matching `.reveal-on-scroll` or `.reveal-group`
  * and applies `.is-revealed` when in viewport.
  */
 export function useScrollReveal() {
   useEffect(() => {
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      // Fallback for environments without IntersectionObserver
-      document.querySelectorAll('.reveal-on-scroll, .reveal-group').forEach((el) => {
+      document.querySelectorAll('.reveal-on-scroll, .reveal-group, .modern-section, .tilt-card').forEach((el) => {
         el.classList.add('is-revealed')
       })
       return
@@ -19,29 +18,42 @@ export function useScrollReveal() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed')
-          // Once revealed, unobserve to keep performance high
           observer.unobserve(entry.target)
         }
       })
     }
 
     const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.05,
+      rootMargin: '0px 0px -20px 0px',
     })
 
-    const elements = document.querySelectorAll(
-      '.reveal-on-scroll, .reveal-group, .modern-section, .tilt-card, .timeline-item-card, .skill-card, .project-card'
-    )
+    const observeAll = () => {
+      const elements = document.querySelectorAll(
+        '.reveal-on-scroll, .reveal-group, .modern-section, .tilt-card, .timeline-item-wrapper, .skill-category-card, .modern-project-card'
+      )
+      elements.forEach((el) => {
+        if (!el.classList.contains('is-revealed')) {
+          observer.observe(el)
+        }
+      })
+    }
 
-    elements.forEach((el) => {
-      if (!el.classList.contains('is-revealed')) {
-        observer.observe(el)
-      }
+    observeAll()
+
+    // Watch for DOM changes when filtering tabs or switching views
+    const mutationObserver = new MutationObserver(() => {
+      observeAll()
+    })
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
     })
 
     return () => {
       observer.disconnect()
+      mutationObserver.disconnect()
     }
   }, [])
 }

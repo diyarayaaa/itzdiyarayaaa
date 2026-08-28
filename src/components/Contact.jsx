@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import confetti from 'canvas-confetti'
 import TiltCard from './TiltCard'
 import {
@@ -10,6 +11,9 @@ import {
   Sparkles,
   ExternalLink,
   Globe2,
+  X,
+  MessageSquare,
+  ArrowRight,
 } from 'lucide-react'
 
 // Clean GitHub SVG Icon
@@ -34,24 +38,57 @@ function GithubIcon({ size = 20, className = '' }) {
 
 function Contact() {
   const [copiedKey, setCopiedKey] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && modalOpen) {
+        setModalOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [modalOpen])
+
+  const handleOpenConversation = (event) => {
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    setModalOpen(true)
+
+    // Confetti celebration
+    try {
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ['#ffffff', '#a1a1aa', '#71717a', '#22c55e'],
+        disableForReducedMotion: true,
+      })
+    } catch {
+      // safe fallback
+    }
+  }
 
   const handleCopy = (text, key, event) => {
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
     navigator.clipboard.writeText(text)
     setCopiedKey(key)
 
-    // Trigger celebratory confetti effect from the clicked element
-    if (event) {
-      const rect = event.currentTarget.getBoundingClientRect()
-      const x = (rect.left + rect.width / 2) / window.innerWidth
-      const y = (rect.top + rect.height / 2) / window.innerHeight
-
+    try {
       confetti({
-        particleCount: 35,
-        spread: 50,
-        origin: { x, y },
+        particleCount: 30,
+        spread: 45,
+        origin: { x: 0.5, y: 0.5 },
         colors: ['#ffffff', '#a1a1aa', '#71717a', '#27272a'],
         disableForReducedMotion: true,
       })
+    } catch {
+      // safe fallback
     }
 
     setTimeout(() => {
@@ -65,7 +102,7 @@ function Contact() {
       icon: <Mail size={20} className="contact-icon-svg" />,
       label: 'DIRECT_EMAIL',
       value: 'wandiadityaputra25@gmail.com',
-      link: 'mailto:wandiadityaputra25@gmail.com',
+      link: 'mailto:wandiadityaputra25@gmail.com?subject=Diskusi%20Proyek%20%2F%20Kolaborasi',
       copyValue: 'wandiadityaputra25@gmail.com',
       actionLabel: 'Send Email',
     },
@@ -74,7 +111,7 @@ function Contact() {
       icon: <Phone size={20} className="contact-icon-svg" />,
       label: 'WHATSAPP_CHAT',
       value: '+62 813 1848 9243',
-      link: 'https://wa.me/6281318489243',
+      link: 'https://wa.me/6281318489243?text=Halo%20Wandi%20(Diyara)%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek%2Fkolaborasi.',
       copyValue: '+6281318489243',
       actionLabel: 'Open WhatsApp',
     },
@@ -107,7 +144,7 @@ function Contact() {
 
       <div className="contact-modern-layout">
         {/* LEFT: Invitation Card */}
-        <TiltCard className="contact-invitation-card" maxTilt={5} scale={1.01}>
+        <TiltCard className="contact-invitation-card" maxTilt={10} scale={1.02}>
           <div className="card-glass-body">
             <div className="card-header-bar">
               <span className="window-title">[ DOC_COMMS // INVITATION ]</span>
@@ -128,13 +165,14 @@ function Contact() {
             </div>
 
             <div className="invitation-cta-box">
-              <a
-                href="mailto:wandiadityaputra25@gmail.com"
-                className="btn-solid-white full-width"
+              <button
+                type="button"
+                className="btn-solid-white full-width conversation-trigger-btn"
+                onClick={handleOpenConversation}
               >
                 <Send size={16} />
                 <span>START A CONVERSATION</span>
-              </a>
+              </button>
             </div>
 
             <div className="contact-perks-list">
@@ -151,7 +189,7 @@ function Contact() {
         </TiltCard>
 
         {/* RIGHT: Contact Channels Document Card */}
-        <TiltCard className="contact-channels-card" maxTilt={5} scale={1.01}>
+        <TiltCard className="contact-channels-card" maxTilt={10} scale={1.02}>
           <div className="card-glass-body">
             <div className="card-header-bar">
               <span className="window-title">[ DOC_COMMS // DIRECT CHANNELS ]</span>
@@ -180,6 +218,7 @@ function Contact() {
                   <div className="channel-actions">
                     {/* Copy Button */}
                     <button
+                      type="button"
                       className={`channel-action-btn copy-btn ${
                         copiedKey === c.key ? 'copied' : ''
                       }`}
@@ -222,6 +261,120 @@ function Contact() {
           </div>
         </TiltCard>
       </div>
+
+      {/* CONVERSATION HUB MODAL (MOUNTED VIA PORTAL TO BODY) */}
+      {modalOpen && typeof document !== 'undefined' && createPortal(
+        <div className="comms-modal-backdrop" onClick={() => setModalOpen(false)}>
+          <div
+            className="comms-modal-card"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="comms-modal-title"
+          >
+            {/* Modal Header */}
+            <div className="comms-modal-header">
+              <div className="comms-modal-title-group">
+                <span className="comms-modal-tag text-highlight-pill">[ DIRECT COMMS ]</span>
+                <h3 id="comms-modal-title" className="comms-modal-title">
+                  Choose Communication Channel
+                </h3>
+              </div>
+              <button
+                type="button"
+                className="comms-modal-close-btn"
+                onClick={() => setModalOpen(false)}
+                aria-label="Close conversation modal"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <p className="comms-modal-intro">
+              Select your preferred method to start a conversation with <strong>Wandi Aditya Putra (Diyara)</strong>:
+            </p>
+
+            {/* Modal Quick Options */}
+            <div className="comms-modal-options">
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/6281318489243?text=Halo%20Wandi%20(Diyara)%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek%2Fkolaborasi."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="comms-option-card option-whatsapp"
+                onClick={() => setModalOpen(false)}
+              >
+                <div className="option-icon-box">
+                  <Phone size={20} />
+                </div>
+                <div className="option-text-group">
+                  <strong className="option-title">WhatsApp Chat</strong>
+                  <span className="option-desc">Fastest response · Instant messaging</span>
+                </div>
+                <ArrowRight size={16} className="option-arrow" />
+              </a>
+
+              {/* Gmail Web */}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=wandiadityaputra25@gmail.com&su=Collaboration%20Inquiry%20-%20Diyara"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="comms-option-card option-gmail"
+                onClick={() => setModalOpen(false)}
+              >
+                <div className="option-icon-box">
+                  <Mail size={20} />
+                </div>
+                <div className="option-text-group">
+                  <strong className="option-title">Open in Gmail (Web)</strong>
+                  <span className="option-desc">Direct browser composer</span>
+                </div>
+                <ArrowRight size={16} className="option-arrow" />
+              </a>
+
+              {/* Default Mail Client */}
+              <a
+                href="mailto:wandiadityaputra25@gmail.com?subject=Collaboration%20Inquiry%20-%20Diyara"
+                className="comms-option-card option-email"
+                onClick={() => setModalOpen(false)}
+              >
+                <div className="option-icon-box">
+                  <Send size={20} />
+                </div>
+                <div className="option-text-group">
+                  <strong className="option-title">Default Mail App</strong>
+                  <span className="option-desc">Outlook, Apple Mail, etc.</span>
+                </div>
+                <ArrowRight size={16} className="option-arrow" />
+              </a>
+            </div>
+
+            {/* Quick Copy Footer */}
+            <div className="comms-modal-copy-row">
+              <span className="copy-row-label">EMAIL ADDRESS:</span>
+              <div className="copy-row-action">
+                <code className="copy-row-code">wandiadityaputra25@gmail.com</code>
+                <button
+                  type="button"
+                  className={`copy-row-btn ${copiedKey === 'modal_email' ? 'copied' : ''}`}
+                  onClick={(e) => handleCopy('wandiadityaputra25@gmail.com', 'modal_email', e)}
+                >
+                  {copiedKey === 'modal_email' ? (
+                    <>
+                      <Check size={14} /> <span>COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={14} /> <span>COPY</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   )
 }

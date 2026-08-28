@@ -152,28 +152,30 @@ function Hero({ isDark = true }) {
                 <div className="avatar-grid-overlay" />
               </div>
 
-              {/* Floating tech badges */}
-              <div className="floating-tech-badge badge-top-left">
-                <ShieldCheck size={14} className="badge-icon" />
-                <div>
-                  <span className="badge-title">IT Support</span>
-                  <span className="badge-sub">Hardware & RMA</span>
+              {/* Floating tech badges (Desktop 3D Floating / Mobile Integrated Grid) */}
+              <div className="avatar-badges-wrapper">
+                <div className="floating-tech-badge badge-top-left">
+                  <ShieldCheck size={14} className="badge-icon" />
+                  <div className="badge-text-group">
+                    <span className="badge-title">IT Support</span>
+                    <span className="badge-sub">Hardware &amp; RMA</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="floating-tech-badge badge-bottom-right">
-                <Cpu size={14} className="badge-icon" />
-                <div>
-                  <span className="badge-title">Diagnostics</span>
-                  <span className="badge-sub">PC Troubleshooting</span>
+                <div className="floating-tech-badge badge-bottom-right">
+                  <Cpu size={14} className="badge-icon" />
+                  <div className="badge-text-group">
+                    <span className="badge-title">Diagnostics</span>
+                    <span className="badge-sub">PC Troubleshooting</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="floating-tech-badge badge-top-right">
-                <Code2 size={14} className="badge-icon" />
-                <div>
-                  <span className="badge-title">Developer</span>
-                  <span className="badge-sub">React & AppSheet</span>
+                <div className="floating-tech-badge badge-top-right">
+                  <Code2 size={14} className="badge-icon" />
+                  <div className="badge-text-group">
+                    <span className="badge-title">Developer</span>
+                    <span className="badge-sub">React &amp; AppSheet</span>
+                  </div>
                 </div>
               </div>
 

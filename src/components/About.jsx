@@ -64,7 +64,7 @@ function About() {
 
       <div className="about-modern-grid">
         {/* LEFT: Story Card */}
-        <TiltCard className="about-story-card" maxTilt={6} scale={1.01}>
+        <TiltCard className="about-story-card" maxTilt={10} scale={1.02}>
           <div className="card-glass-body">
             <div className="card-header-bar">
               <span className="window-title">[ DOCS_REF // BIOGRAPHY ]</span>
@@ -104,7 +104,7 @@ function About() {
         </TiltCard>
 
         {/* RIGHT: Operator Matrix & Philosophy Card */}
-        <TiltCard className="about-identity-card" maxTilt={6} scale={1.01}>
+        <TiltCard className="about-identity-card" maxTilt={10} scale={1.02}>
           <div className="card-glass-body">
             <div className="card-header-bar">
               <span className="window-title">[ DOCS_REF // OPERATOR MATRIX ]</span>

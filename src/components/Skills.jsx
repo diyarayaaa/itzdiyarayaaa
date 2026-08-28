@@ -107,10 +107,10 @@ function Skills() {
       <div className="skills-modern-grid">
         {filteredData.map((category, index) => (
           <TiltCard
-            key={index}
+            key={category.category}
             className="skill-category-card"
-            maxTilt={6}
-            scale={1.01}
+            maxTilt={10}
+            scale={1.02}
           >
             <div className="skill-card-inner">
               {/* Header */}

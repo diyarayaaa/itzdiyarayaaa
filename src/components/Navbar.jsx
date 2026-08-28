@@ -7,6 +7,16 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
   const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen])
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 30) {
         setScrolled(true)
@@ -158,7 +168,15 @@ function Navbar({ onNavigate, isDark, onToggleTheme }) {
         </div>
       </nav>
 
-      {/* MOBILE DRAWER */}
+      {/* MOBILE DRAWER BACKDROP & DRAWER */}
+      {menuOpen && (
+        <div
+          className="mobile-drawer-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       <div className={`mobile-nav-drawer ${menuOpen ? 'open' : ''}`}>
         <div className="mobile-drawer-content">
           <div className="mobile-drawer-header">

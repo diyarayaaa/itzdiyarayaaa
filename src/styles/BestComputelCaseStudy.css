@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BEST COMPUTEL CASE STUDY — NEO-BRUTALIST TECH DOCS THEME
+   BEST COMPUTEL CASE STUDY — NEO-BRUTALIST TECH DOCS THEME (FULLY RESPONSIVE)
    ========================================================================== */
 
 .case-study-overlay-view {
@@ -13,11 +13,11 @@
 .case-study-page {
   width: 100%;
   min-height: 100vh;
-  padding: 110px 4% 60px;
+  padding: 100px 4% 60px;
   background: transparent;
   color: var(--text-main);
   position: relative;
-  max-width: 1540px;
+  max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -27,7 +27,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 22px;
+  padding: 10px 20px;
   border: 1px solid var(--border-bright);
   border-radius: 2px;
   background: var(--bg-surface);
@@ -39,7 +39,8 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+  touch-action: manipulation;
 }
 
 .case-study-back:hover {
@@ -52,8 +53,8 @@
 /* HERO SECTION */
 .case-study-hero {
   width: 100%;
-  margin-bottom: 50px;
-  padding-bottom: 36px;
+  margin-bottom: 44px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -70,20 +71,22 @@
 }
 
 .case-study-hero h1 {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-size: clamp(1.6rem, 3.8vw, 3rem);
   line-height: 1.25;
   font-weight: 700;
   color: var(--text-main);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .case-study-intro {
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
   line-height: 1.8;
-  margin: 0 0 24px;
+  margin: 0 0 22px;
   max-width: 880px;
   font-family: var(--font-body);
 }
@@ -116,24 +119,26 @@
 /* SECTIONS */
 .case-study-section {
   width: 100%;
-  margin-bottom: 50px;
-  padding-bottom: 36px;
+  margin-bottom: 44px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .case-study-section h2 {
   margin: 0 0 16px;
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
   line-height: 1.3;
   font-weight: 700;
   color: var(--text-main);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .case-study-section > p:not(.case-study-label) {
   color: var(--text-muted);
-  font-size: 1.02rem;
+  font-size: clamp(0.92rem, 1.6vw, 1.02rem);
   line-height: 1.8;
   margin: 0 0 16px;
   max-width: 880px;
@@ -143,9 +148,9 @@
 /* CASE STUDY CARDS & GRID */
 .case-study-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  margin-top: 22px;
 }
 
 .case-study-tilt-wrap {
@@ -155,7 +160,7 @@
 }
 
 .case-study-card {
-  padding: 26px 24px;
+  padding: 24px 22px;
   background: var(--bg-card);
   border: 1px solid var(--border-bright);
   border-radius: 2px;
@@ -174,7 +179,7 @@
 .case-study-card h3 {
   margin: 0 0 10px;
   font-family: var(--font-heading);
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: 0.02em;
@@ -183,7 +188,7 @@
 .case-study-card p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   line-height: 1.75;
   font-family: var(--font-body);
 }
@@ -193,11 +198,11 @@
   background: var(--bg-card);
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 28px 26px;
+  padding: 26px 24px;
 }
 
 .featured-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin-bottom: 12px;
 }
 
@@ -210,31 +215,31 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .workflow-step {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 18px 22px;
+  padding: 16px 20px;
   background: var(--bg-card);
   border: 1px solid var(--border-bright);
   border-radius: 2px;
-  min-width: 180px;
+  min-width: min(100%, 170px);
   flex: 1;
 }
 
 .workflow-step strong {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--text-main);
 }
 
 .workflow-step span {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--text-muted);
   font-family: var(--font-body);
@@ -243,26 +248,29 @@
 .workflow-arrow {
   color: var(--border-contrast);
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .process-flow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 18px;
 }
 
 .process-flow > div {
-  padding: 10px 18px;
+  padding: 9px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border-bright);
   border-radius: 2px;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-main);
   letter-spacing: 0.04em;
 }
@@ -271,12 +279,15 @@
   color: var(--border-contrast);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* SCREENSHOT PREVIEWS & PLACEHOLDERS */
 .case-study-screenshot {
-  margin: 24px 0;
+  margin: 22px 0;
   border-radius: 2px;
   overflow: hidden;
   border: 1px solid var(--border-bright);
@@ -290,11 +301,11 @@
 }
 
 .case-study-screenshot p {
-  padding: 12px 18px;
+  padding: 12px 16px;
   margin: 0;
   background: var(--bg-surface);
   font-family: var(--font-heading);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-subtle);
   letter-spacing: 0.06em;
@@ -302,18 +313,18 @@
 }
 
 .screenshot-placeholder {
-  margin: 24px 0;
+  margin: 22px 0;
   border-radius: 2px;
   border: 1px dashed var(--border-contrast);
   background: var(--bg-card);
-  padding: 32px 20px;
+  padding: 28px 18px;
   text-align: center;
 }
 
 .screenshot-placeholder span {
   display: inline-block;
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-subtle);
   letter-spacing: 0.1em;
@@ -322,33 +333,33 @@
 
 .screenshot-placeholder p {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-main);
   margin: 0;
 }
 
 .impact-highlight {
-  margin-top: 24px;
-  padding: 20px 24px;
+  margin-top: 22px;
+  padding: 18px 20px;
   background: var(--bg-surface);
   border-left: 3px solid var(--text-main);
   border-radius: 2px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-main);
   font-family: var(--font-body);
 }
 
 .case-study-end {
-  max-width: 900px;
-  margin-top: 50px;
-  padding-top: 30px;
+  max-width: 880px;
+  margin-top: 44px;
+  padding-top: 28px;
   border-top: 1px solid var(--border-subtle);
 }
 
 .case-study-end h2 {
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
   font-weight: 700;
   margin-bottom: 12px;
   color: var(--text-main);
@@ -356,9 +367,9 @@
 
 .case-study-end p {
   color: var(--text-muted);
-  font-size: 1.02rem;
+  font-size: 1rem;
   line-height: 1.8;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   font-family: var(--font-body);
 }
 
@@ -367,27 +378,91 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS FOR CASE STUDY
+   ========================================================================== */
+
+/* TABLET (<= 1024px) */
+@media (max-width: 1024px) {
+  .case-study-page {
+    padding: 95px 5% 50px;
+  }
+  
+  .case-study-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+}
+
+/* MOBILE PHABLET & TABLET PORTRAIT (<= 768px) */
 @media (max-width: 768px) {
   .case-study-page {
-    padding: 70px 4% 50px;
+    padding: 85px 5% 40px;
   }
+  
+  .case-study-back {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
   .case-study-grid {
     grid-template-columns: 1fr;
   }
+  
   .workflow {
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
   }
+  
+  .workflow-step {
+    width: 100%;
+  }
+
   .workflow-arrow {
     text-align: center;
     transform: rotate(90deg);
+    padding: 4px 0;
   }
+
   .process-flow {
     flex-direction: column;
     align-items: stretch;
+    gap: 6px;
   }
+  
+  .process-flow > div {
+    width: 100%;
+    text-align: center;
+  }
+
   .process-flow > span {
     text-align: center;
     transform: rotate(90deg);
+    padding: 2px 0;
+  }
+}
+
+/* SMALL MOBILE PHONES (<= 480px) */
+@media (max-width: 480px) {
+  .case-study-page {
+    padding: 75px 4% 35px;
+  }
+  
+  .case-study-card {
+    padding: 20px 16px;
+  }
+  
+  .featured-card {
+    padding: 20px 16px;
+  }
+  
+  .impact-highlight {
+    padding: 16px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .screenshot-placeholder {
+    padding: 24px 14px;
   }
 }

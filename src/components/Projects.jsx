@@ -104,8 +104,8 @@ function Projects({ onCaseStudy }) {
           <TiltCard
             key={project.id}
             className={`modern-project-card ${project.featured ? 'featured-highlight' : ''}`}
-            maxTilt={6}
-            scale={1.01}
+            maxTilt={10}
+            scale={1.02}
           >
             <div className="project-card-glass">
               {/* Top Banner Bar */}

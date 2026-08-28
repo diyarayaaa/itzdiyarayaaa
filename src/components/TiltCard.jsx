@@ -20,6 +20,7 @@ function TiltCard({
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return
+
     const rect = cardRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -31,7 +32,7 @@ function TiltCard({
 
     setStyle({
       transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`,
-      transition: 'transform 0.1s ease-out',
+      transition: 'transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1)',
     })
 
     if (glare) {
@@ -39,7 +40,7 @@ function TiltCard({
       const glareY = (y / rect.height) * 100
       setGlareStyle({
         opacity: 1,
-        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%)`,
+        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 70%)`,
       })
     }
   }
@@ -88,7 +89,7 @@ function TiltCard({
           }}
         />
       )}
-      <div style={{ transform: 'translateZ(25px)', transformStyle: 'preserve-3d', width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ position: 'relative', zIndex: 2, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         {children}
       </div>
     </div>

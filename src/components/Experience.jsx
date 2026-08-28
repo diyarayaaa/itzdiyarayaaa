@@ -65,7 +65,7 @@ function Experience() {
               </div>
 
               {/* Timeline Card */}
-              <TiltCard className="timeline-tilt-card" maxTilt={5} scale={1.01}>
+              <TiltCard className="timeline-tilt-card" maxTilt={10} scale={1.02}>
                 <div className="timeline-card-inner">
                   {/* Top Bar */}
                   <div className="timeline-top-bar">
