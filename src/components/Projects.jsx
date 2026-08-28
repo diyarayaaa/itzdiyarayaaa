@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   Sparkles,
   CheckCircle2,
-  Maximize2,
 } from 'lucide-react'
 
 function Projects({ onCaseStudy }) {
@@ -123,9 +122,6 @@ function Projects({ onCaseStudy }) {
                 </div>
 
                 <div className="project-top-right-group">
-                  <span className="zoom-hint-badge">
-                    <Maximize2 size={11} /> <span>CLICK TO ZOOM</span>
-                  </span>
                   <div className="project-badge-pill">
                     <span className="project-badge-text">{project.badge}</span>
                   </div>

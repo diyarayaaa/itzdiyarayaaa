@@ -227,15 +227,9 @@ function Contact() {
                       aria-label={`Copy ${c.label}`}
                     >
                       {copiedKey === c.key ? (
-                        <>
-                          <Check size={14} className="text-green" />
-                          <span className="action-tooltip">COPIED!</span>
-                        </>
+                        <Check size={14} className="text-green" />
                       ) : (
-                        <>
-                          <Copy size={14} />
-                          <span className="action-tooltip">COPY</span>
-                        </>
+                        <Copy size={14} />
                       )}
                     </button>
 
@@ -358,15 +352,13 @@ function Contact() {
                   type="button"
                   className={`copy-row-btn ${copiedKey === 'modal_email' ? 'copied' : ''}`}
                   onClick={(e) => handleCopy('wandiadityaputra25@gmail.com', 'modal_email', e)}
+                  title="Copy email"
+                  aria-label="Copy email"
                 >
                   {copiedKey === 'modal_email' ? (
-                    <>
-                      <Check size={14} /> <span>COPIED!</span>
-                    </>
+                    <Check size={14} className="text-green" />
                   ) : (
-                    <>
-                      <Copy size={14} /> <span>COPY</span>
-                    </>
+                    <Copy size={14} />
                   )}
                 </button>
               </div>

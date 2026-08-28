@@ -9,7 +9,6 @@ import {
   MapPin,
   CheckCircle2,
   Layers,
-  Maximize2,
 } from 'lucide-react'
 
 function About() {
@@ -18,52 +17,52 @@ function About() {
   const highlights = [
     'PC & Laptop Advanced Hardware Troubleshooting',
     'Windows & Linux OS Deployment and Tuning',
-    'Local Area Network (LAN) & Router Config',
-    'Service, RMA & Warranty Lifecycle Administration',
-    'Modern Web Development with React & JavaScript',
-    'Automated Workflow with Google Sheets & AppSheet',
+    'Component Replacement & Warranty / RMA Flow',
+    'Network Configuration & Peripheral Diagnostics',
+    'Modern Web Applications (React, Vite, JavaScript)',
+    'Technical Data Logging & Systems Documentation',
   ]
 
   const infoGrid = [
     {
-      icon: <User size={18} className="info-icon" />,
-      label: 'FULL NAME',
+      icon: <User size={16} className="info-icon" />,
+      label: 'IDENTITY',
       value: 'Wandi Aditya Putra',
-      sub: 'Known as Diyara',
+      sub: 'Known as Diyara // Tech Enthusiast',
     },
     {
-      icon: <GraduationCap size={18} className="info-icon" />,
-      label: 'EDUCATION',
-      value: 'S1 Information Systems',
-      sub: 'Computer & Network Focus',
+      icon: <GraduationCap size={16} className="info-icon" />,
+      label: 'ACADEMIC',
+      value: 'Information Systems',
+      sub: 'Institut Teknologi Garut (2024 - Present)',
     },
     {
-      icon: <Briefcase size={18} className="info-icon" />,
-      label: 'SPECIALTY',
-      value: 'IT Support & Technician',
-      sub: 'Service & System Admin',
+      icon: <Briefcase size={16} className="info-icon" />,
+      label: 'PRACTICE',
+      value: 'Hardware & IT Support',
+      sub: 'Best Computel Service Garut (Active)',
     },
     {
-      icon: <MapPin size={18} className="info-icon" />,
+      icon: <MapPin size={16} className="info-icon" />,
       label: 'LOCATION',
-      value: 'Garut / West Java',
-      sub: 'Indonesia',
+      value: 'Garut, West Java',
+      sub: 'Indonesia (WIB / UTC+7)',
     },
   ]
 
   return (
-    <section id="about" className="about-section modern-section">
+    <section id="about" className="modern-section about-section">
+      {/* SECTION HEADER */}
       <div className="section-header-modern">
         <div className="section-tag">
-          <span className="mono-tag">[ 01 // ABOUT ]</span>
+          <Terminal size={13} />
+          <span className="mono-tag">[ SYS_PROFILE // 01 ]</span>
           <span className="chip-sep">/</span>
-          <span className="section-tag-sub">ENGINEERING DOSSIER</span>
+          <span className="section-tag-sub">ABOUT THE OPERATOR</span>
         </div>
-        <h2 className="section-title-modern">
-          Engineering Solutions Through Hardware & Code
-        </h2>
+        <h2 className="section-title-modern">ENGINEERING PROFILE &amp; OPERATIONAL BACKGROUND</h2>
         <p className="section-subtitle">
-          Bridging the gap between physical IT infrastructure and intelligent digital software systems.
+          Bridging physical computer architectures, precision diagnostics, and scalable web engineering.
         </p>
       </div>
 
@@ -83,9 +82,6 @@ function About() {
             <div className="card-header-bar">
               <span className="window-title">[ DOCS_REF // BIOGRAPHY ]</span>
               <div className="card-header-right-action">
-                <span className="zoom-hint-badge">
-                  <Maximize2 size={11} /> <span>CLICK TO ZOOM</span>
-                </span>
                 <div className="window-badge text-highlight-pill">STATUS: ACTIVE</div>
               </div>
             </div>
@@ -137,9 +133,6 @@ function About() {
             <div className="card-header-bar">
               <span className="window-title">[ DOCS_REF // OPERATOR MATRIX ]</span>
               <div className="card-header-right-action">
-                <span className="zoom-hint-badge">
-                  <Maximize2 size={11} /> <span>CLICK TO ZOOM</span>
-                </span>
                 <div className="window-badge text-highlight-pill">VERIFIED: ID</div>
               </div>
             </div>

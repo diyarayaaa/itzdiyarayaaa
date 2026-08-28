@@ -138,8 +138,8 @@ function Hero({ isDark = true }) {
             <div className="hero-avatar-frame">
               {/* Top Bar for Card */}
               <div className="avatar-frame-header">
-                <span className="frame-id-tag">[ FIG_01: OPERATOR ]</span>
                 <span className="frame-status-dot" />
+                <span className="frame-id-tag">[ FIG_01: OPERATOR ]</span>
               </div>
 
               {/* Profile Image */}

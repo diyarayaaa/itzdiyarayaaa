@@ -7,7 +7,6 @@ import {
   Code2,
   Database,
   CheckCircle,
-  Maximize2,
 } from 'lucide-react'
 
 function Skills() {
@@ -133,9 +132,6 @@ function Skills() {
                 <div className="skill-header-meta">
                   <div className="skill-meta-top-row">
                     <span className="skill-meta-label">[ DISCIPLINE 0{index + 1} ]</span>
-                    <span className="zoom-hint-badge">
-                      <Maximize2 size={11} /> <span>ZOOM</span>
-                    </span>
                   </div>
                   <h3 className="skill-card-title">{category.titleJsx}</h3>
                 </div>

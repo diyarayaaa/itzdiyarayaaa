@@ -7,7 +7,6 @@ import {
   MapPin,
   CheckCircle2,
   Award,
-  Maximize2,
 } from 'lucide-react'
 
 function Experience() {
@@ -98,9 +97,6 @@ function Experience() {
                     </div>
 
                     <div className="timeline-top-right-group">
-                      <span className="zoom-hint-badge">
-                        <Maximize2 size={11} /> <span>CLICK TO ZOOM</span>
-                      </span>
                       <div className="timeline-location">
                         <MapPin size={13} />
                         <span>{exp.location}</span>
