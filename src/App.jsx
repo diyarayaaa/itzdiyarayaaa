@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Component } from 'react'
 
 import Navbar from './components/Navbar'
-import ScrollProgressBar from './components/ScrollProgressBar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -12,6 +11,7 @@ import Footer from './components/Footer'
 import BestComputelCaseStudy from './components/BestComputelCaseStudy'
 import ThreeBackground from './components/ThreeBackground'
 import CustomCursor from './components/CustomCursor'
+import ScrollProgress from './components/ScrollProgress'
 import { useScrollReveal } from './hooks/useScrollReveal'
 
 import './App.css'
@@ -111,8 +111,8 @@ function App() {
 
   return (
     <div className={`app-root ${isDark ? 'theme-dark' : 'theme-light'}`}>
-      {/* Global Top Scroll Progress Indicator */}
-      <ScrollProgressBar />
+      {/* Top Header Scroll Progress Bar */}
+      <ScrollProgress />
 
       {/* 3D WebGL Background Canvas with ErrorBoundary */}
       <ErrorBoundary>

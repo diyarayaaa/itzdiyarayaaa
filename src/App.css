@@ -4,29 +4,6 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   0. GLOBAL SCROLL PROGRESS BAR (TOP HEADER ACCENT)
-   -------------------------------------------------------------------------- */
-.global-scroll-progress-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2.5px;
-  background: transparent;
-  z-index: 99999;
-  pointer-events: none;
-}
-
-.global-scroll-progress-fill {
-  height: 100%;
-  width: 100%;
-  background: var(--acc, #F5C518);
-  transform-origin: left;
-  will-change: transform;
-  box-shadow: 0 0 10px rgba(245, 197, 24, 0.7), 0 0 20px rgba(245, 197, 24, 0.4);
-}
-
-/* --------------------------------------------------------------------------
    1. GLOBAL & LAYOUT UTILITIES
    -------------------------------------------------------------------------- */
 .app-root {
@@ -59,7 +36,7 @@
 .section-header-modern {
   text-align: left;
   max-width: 880px;
-  margin-bottom: 36px;
+  margin-bottom: 16px;
 }
 
 .section-tag {
@@ -279,6 +256,194 @@
   border: none;
   background: transparent;
   box-shadow: none;
+}
+
+/* ==========================================================================
+   GLOBAL SCROLL PROGRESS BAR (TOP HEADER)
+   ========================================================================== */
+.global-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: transparent;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.global-scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--text-main);
+  box-shadow: 0 0 10px var(--text-main);
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+/* ==========================================================================
+   ZOOMABLE INTERACTIVE CARDS & ZOOM HINT BADGE
+   ========================================================================== */
+.zoomable-interactive-card {
+  cursor: pointer;
+  outline: none;
+}
+
+.zoomable-interactive-card:focus-visible {
+  outline: 2px solid var(--border-contrast);
+  outline-offset: 2px;
+}
+
+.card-header-right-action,
+.project-top-right-group,
+.skill-meta-top-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zoom-hint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-subtle);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.zoomable-interactive-card:hover .zoom-hint-badge {
+  opacity: 1;
+  color: var(--text-main);
+  border-color: var(--border-bright);
+}
+
+/* ==========================================================================
+   CARD ZOOM LIGHTBOX MODAL SYSTEM
+   ========================================================================== */
+.card-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px var(--section-padding-x, 4%);
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-zoom-container {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-contrast);
+  border-radius: 6px;
+  max-width: 820px;
+  width: 100%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.85), 0 0 40px var(--glow-card-ambient);
+  animation: modalScaleUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card-zoom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  flex-shrink: 0;
+}
+
+.card-zoom-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+}
+
+.card-zoom-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-zoom-close-btn:hover {
+  background: var(--accent-white);
+  color: var(--text-dark);
+  border-color: var(--accent-white);
+}
+
+.card-zoom-body {
+  padding: 28px 24px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-zoomed-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-zoomed-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
 }
 
 /* BUTTONS */
@@ -1576,169 +1741,23 @@
 }
 
 /* --------------------------------------------------------------------------
-   6. PROJECTS SECTION (PINNED HORIZONTAL TRACK — RAFAEL KUROSAWA STYLE)
+   6. PROJECTS SECTION
    -------------------------------------------------------------------------- */
-.projects-pinned-section {
-  position: relative;
-  width: 100%;
-  min-height: 280vh;
-}
-
-.projects-pinned-section.is-mobile-view {
-  min-height: auto;
-}
-
-.projects-sticky-frame {
-  position: sticky;
-  top: 60px;
-  height: calc(100vh - 65px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-  padding-bottom: 20px;
-}
-
-.projects-pinned-section.is-mobile-view .projects-sticky-frame {
-  position: relative;
-  top: 0;
-  height: auto;
-  overflow: visible;
-}
-
-.projects-header-wrapper {
-  padding-top: 15px !important;
-  padding-bottom: 0px !important;
-  margin-bottom: 0 !important;
-}
-
-.projects-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.projects-meta-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-/* PIN CONTROLS (COUNTER & DOTS & ARROWS) */
-.projects-pin-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-bright);
-  padding: 6px 14px;
-  border-radius: 30px;
-  box-shadow: var(--shadow-sm);
-}
-
-.pin-counter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.pin-count-current {
-  color: var(--acc, #F5C518);
-  font-weight: 800;
-}
-
-.pin-count-sep {
-  color: var(--border-contrast);
-}
-
-.pin-count-total {
-  color: var(--text-subtle);
-}
-
-.pin-dots-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.pin-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--border-bright);
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.pin-dot:hover {
-  background: var(--text-subtle);
-  transform: scale(1.2);
-}
-
-.pin-dot.is-active {
-  background: var(--acc, #F5C518);
-  width: 24px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
-}
-
-.pin-arrow-btns {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pin-arrow-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pin-arrow-btn:hover:not(:disabled) {
-  background: var(--accent-white);
-  color: var(--text-dark);
-  border-color: var(--accent-white);
-}
-
-.pin-arrow-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
 .projects-filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .project-filter-btn {
   background: var(--bg-surface);
   border: 1px solid var(--border-bright);
   border-radius: 2px;
-  padding: 6px 14px;
-  min-height: 34px;
+  padding: 8px 16px;
+  min-height: 38px;
   font-family: var(--font-heading);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--text-muted);
@@ -1755,46 +1774,18 @@
   border-color: var(--accent-white);
 }
 
-/* TRACK VIEWPORT & HORIZONTAL TRACK */
-.projects-track-viewport {
-  position: relative;
+.projects-modern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 20px;
   width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 10px var(--section-padding-x, 4%) 20px;
-  overflow: hidden;
-}
-
-.projects-pinned-section.is-mobile-view .projects-track-viewport {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 20px var(--section-padding-x, 4%);
-}
-
-.projects-horizontal-track {
-  display: flex;
   align-items: stretch;
-  gap: 28px;
-  will-change: transform;
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.projects-pinned-section.is-mobile-view .projects-horizontal-track {
-  transition: none;
-}
-
-.projects-horizontal-track .modern-project-card {
-  width: clamp(340px, 42vw, 560px);
-  min-width: clamp(340px, 42vw, 560px);
+.modern-project-card {
   height: 100%;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-}
-
-.modern-project-card.is-active-project {
-  border-color: var(--border-contrast);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card-glass {
@@ -1833,7 +1824,7 @@
   font-family: var(--font-heading);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--acc, #F5C518);
+  color: var(--text-subtle);
   letter-spacing: 0.06em;
 }
 
@@ -1907,7 +1898,7 @@
 }
 
 .feature-check {
-  color: var(--acc, #F5C518);
+  color: var(--text-main);
   flex-shrink: 0;
   margin-top: 3px;
 }
@@ -1973,135 +1964,95 @@
   background: var(--accent-green);
 }
 
-/* END OF TRACK CUE CARD */
-.projects-end-card {
-  width: 320px;
-  min-width: 320px;
+/* --------------------------------------------------------------------------
+   7. EXPERIENCE SECTION
+   -------------------------------------------------------------------------- */
+.experience-section {
+  padding-top: 48px !important;
+}
+
+.experience-section .section-header-modern {
+  margin-bottom: 8px !important;
+}
+
+.experience-section .section-subtitle {
+  margin-bottom: 0 !important;
+}
+
+.experience-timeline-container,
+.experience-stack-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.experience-timeline-list,
+.experience-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  width: 100%;
+  padding-left: 0 !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+}
+
+.timeline-item-wrapper,
+.experience-stack-item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* TIMELINE TRACK RAIL (MATCHES CARD HEIGHT EXACTLY) */
+.timeline-track-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
   flex-shrink: 0;
+}
+
+.timeline-node-marker {
+  width: 11px;
+  height: 11px;
+  background: var(--bg-base);
+  border: 2px solid var(--text-main);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-card);
-  border: 1px dashed var(--border-bright);
-  border-radius: 4px;
-  padding: 32px 24px;
-  text-align: left;
+  z-index: 2;
+  flex-shrink: 0;
+  margin-top: 14px;
 }
 
-.end-card-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.node-inner-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-main);
 }
 
-.end-card-tag {
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--acc, #F5C518);
-  letter-spacing: 0.1em;
+.timeline-tracer-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border-bright);
+  opacity: 0.7;
+  margin-top: 4px;
+  margin-bottom: 14px;
 }
 
-.end-card-inner h4 {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.35;
-}
-
-.end-card-inner p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.projects-track-progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: var(--section-padding-x, 4%);
-  right: var(--section-padding-x, 4%);
-  height: 2px;
-  background: var(--border-subtle);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.projects-track-progress-fill {
-  height: 100%;
-  width: 100%;
-  background: var(--acc, #F5C518);
-  transform-origin: left;
-  will-change: transform;
-}
-
-/* --------------------------------------------------------------------------
-   7. EXPERIENCE SECTION (STICKY STACKING CARDS — RAFAEL KUROSAWA STYLE)
-   -------------------------------------------------------------------------- */
-.experience-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.stack-guide-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-bright);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-family: var(--font-heading);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--acc, #F5C518);
-}
-
-.experience-stack-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  position: relative;
-  max-width: 1080px;
-  margin: 20px 0 60px;
-}
-
-.experience-stack-item {
-  position: sticky;
-  will-change: transform;
-  transition: transform 0.3s ease;
-}
-
-.studio-stack-card {
-  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 0, 0, 0.4);
-}
-
-.exp-index-chip {
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-.exp-category-pill {
-  font-family: var(--font-heading);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--acc, #F5C518);
-  background: rgba(245, 197, 24, 0.1);
-  border: 1px solid rgba(245, 197, 24, 0.25);
-  padding: 3px 8px;
-  border-radius: 2px;
-}
-
-.timeline-meta-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.timeline-tilt-card {
+  flex: 1;
+  min-width: 0;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px var(--glow-card-ambient);
 }
 
 .timeline-card-inner {
@@ -3273,20 +3224,16 @@
     grid-template-columns: 1fr;
   }
 
-  .experience-timeline-list {
-    padding-left: 24px;
+  .experience-timeline-list,
+  .experience-stack-list {
+    padding-left: 0 !important;
     gap: 16px;
+    width: 100%;
   }
 
-  .timeline-tracer-line {
-    left: 4px;
-  }
-
-  .timeline-node-marker {
-    left: -22px;
-    width: 9px;
-    height: 9px;
-    top: 20px;
+  .timeline-top-tracer-bar {
+    gap: 8px;
+    margin-bottom: 8px;
   }
 
   .timeline-card-inner {

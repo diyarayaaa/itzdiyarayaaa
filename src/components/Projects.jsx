@@ -1,22 +1,16 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import TiltCard from './TiltCard'
+import CardModal from './CardModal'
 import {
   ArrowUpRight,
   Sparkles,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
-  ArrowRight,
+  Maximize2,
 } from 'lucide-react'
 
 function Projects({ onCaseStudy }) {
   const [filter, setFilter] = useState('all')
-  const [activeIdx, setActiveIdx] = useState(0)
-  const containerRef = useRef(null)
-  const trackRef = useRef(null)
-  const [translateX, setTranslateX] = useState(0)
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
+  const [zoomedProject, setZoomedProject] = useState(null)
 
   const projects = [
     {
@@ -49,10 +43,10 @@ function Projects({ onCaseStudy }) {
       category: 'web',
       categoryLabel: 'Modern Web Application',
       description:
-        'A high-performance, dark minimalist portfolio engineered with Three.js 3D WebGL particle networks, CSS 3D perspective physics, monochrome tech docs design system, and custom studio interactions.',
+        'A high-performance, dark minimalist portfolio engineered with Three.js 3D WebGL particle networks, CSS 3D perspective physics, monochrome tech docs design system, and custom interactions.',
       features: [
         'Interactive 3D WebGL Particle Constellation Engine',
-        'Custom 3D Perspective Card Tilt & Spotlight Physics',
+        'Custom 3D Perspective Card Tilt Physics',
         'Dark Minimalist & Neo-Brutalist Tech Docs System',
         'Dynamic Role Animation & Interactive Contact Hub',
       ],
@@ -68,29 +62,6 @@ function Projects({ onCaseStudy }) {
       badge: 'INTERACTIVE PLATFORM',
       stats: '60 FPS WEBGL RENDERING',
     },
-    {
-      id: 'hardware-matrix',
-      title: 'Automated PC Hardware Diagnostic & Inventory Matrix',
-      category: 'system',
-      categoryLabel: 'Hardware & Inventory Infrastructure',
-      description:
-        'Cloud-synced inventory and technician testbench dashboard for logging component stress test metrics, hardware temperature logs, RMA serial numbers, and parts allocation in real-time.',
-      features: [
-        'Component Thermal & Benchmark Data Logging',
-        'Automated Low-Stock & Serial RMA Alerts',
-        'QR/Barcode Mobile Scanner Integration',
-        'Multi-Technician Collaborative Workbench Sync',
-      ],
-      technologies: [
-        'AppSheet',
-        'Google Workspace API',
-        'Cloud Datastore',
-        'Automation Workflows',
-      ],
-      featured: false,
-      badge: 'HARDWARE INTELLIGENCE',
-      stats: '500+ ASSETS MONITORED',
-    },
   ]
 
   const categories = [
@@ -102,316 +73,213 @@ function Projects({ onCaseStudy }) {
   const filteredProjects =
     filter === 'all' ? projects : projects.filter((p) => p.category === filter)
 
-  // Detect viewport size
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 900)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  // Scroll Choreography for Pinned Horizontal Track
-  useEffect(() => {
-    if (isMobile) return
-
-    const handleScroll = () => {
-      if (!containerRef.current || !trackRef.current) return
-
-      const containerRect = containerRef.current.getBoundingClientRect()
-      const containerTop = containerRef.current.offsetTop
-      const containerHeight = containerRef.current.offsetHeight
-      const viewportHeight = window.innerHeight
-
-      const scrollDistance = window.scrollY - containerTop
-      const maxScrollDistance = containerHeight - viewportHeight
-
-      if (maxScrollDistance <= 0) return
-
-      const progress = Math.max(0, Math.min(1, scrollDistance / maxScrollDistance))
-      setScrollProgress(progress)
-
-      const trackWidth = trackRef.current.scrollWidth
-      const trackVisibleWidth = trackRef.current.clientWidth
-      const maxTranslate = Math.max(0, trackWidth - trackVisibleWidth + 60)
-
-      setTranslateX(progress * maxTranslate)
-
-      const totalItems = filteredProjects.length
-      const currentIdx = Math.min(
-        totalItems - 1,
-        Math.max(0, Math.floor(progress * totalItems * 0.999))
-      )
-      setActiveIdx(currentIdx)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isMobile, filteredProjects.length])
-
-  // Click dot to navigate to specific project
-  const scrollToProject = useCallback(
-    (index) => {
-      if (isMobile) {
-        if (trackRef.current) {
-          const cards = trackRef.current.querySelectorAll('.modern-project-card')
-          if (cards[index]) {
-            cards[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
-          }
-        }
-        setActiveIdx(index)
-        return
-      }
-
-      if (!containerRef.current) return
-      const containerTop = containerRef.current.offsetTop
-      const containerHeight = containerRef.current.offsetHeight
-      const viewportHeight = window.innerHeight
-      const maxScrollDistance = containerHeight - viewportHeight
-      const totalItems = filteredProjects.length
-
-      const targetProgress = (index + 0.15) / totalItems
-      const targetScroll = containerTop + targetProgress * maxScrollDistance
-
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth',
-      })
-    },
-    [isMobile, filteredProjects.length]
-  )
-
-  const handlePrev = () => {
-    const nextIdx = Math.max(0, activeIdx - 1)
-    scrollToProject(nextIdx)
-  }
-
-  const handleNext = () => {
-    const nextIdx = Math.min(filteredProjects.length - 1, activeIdx + 1)
-    scrollToProject(nextIdx)
-  }
-
   return (
-    <section
-      id="projects"
-      ref={containerRef}
-      className={`projects-pinned-section ${isMobile ? 'is-mobile-view' : ''}`}
-    >
-      <div className="projects-sticky-frame">
-        {/* Top Section Header */}
-        <div className="projects-header-wrapper modern-section">
-          <div className="section-header-modern">
-            <div className="section-tag">
-              <span className="mono-tag">[ 03 // WORK ]</span>
-              <span className="chip-sep">/</span>
-              <span className="section-tag-sub">PINNED CASE STUDIES</span>
-            </div>
+    <section id="projects" className="projects-section modern-section">
+      <div className="section-header-modern">
+        <div className="section-tag">
+          <span className="mono-tag">[ 03 // PORTFOLIO ]</span>
+          <span className="chip-sep">/</span>
+          <span className="section-tag-sub">CASE STUDIES & SYSTEMS</span>
+        </div>
+        <h2 className="section-title-modern">
+          Featured Creations & Systems
+        </h2>
+        <p className="section-subtitle">
+          Real-world applications and digital infrastructure engineered to solve tangible operational challenges.
+        </p>
 
-            <div className="projects-title-row">
-              <h2 className="section-title-modern">Featured Creations &amp; Systems</h2>
+        {/* Filter buttons */}
+        <div className="projects-filter-bar">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`project-filter-btn ${filter === cat.id ? 'active' : ''}`}
+              onClick={() => setFilter(cat.id)}
+            >
+              <span>{cat.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
-              {/* Pin Counter and Navigation Controls */}
-              <div className="projects-pin-controls" aria-label="Project Navigation">
-                <div className="pin-counter-badge">
-                  <span className="pin-count-current">
-                    0{Math.min(filteredProjects.length, activeIdx + 1)}
-                  </span>
-                  <span className="pin-count-sep">/</span>
-                  <span className="pin-count-total">0{filteredProjects.length}</span>
+      <div className="projects-modern-grid">
+        {filteredProjects.map((project, index) => (
+          <TiltCard
+            key={project.id}
+            className={`modern-project-card zoomable-interactive-card ${project.featured ? 'featured-highlight' : ''}`}
+            maxTilt={8}
+            scale={1.015}
+            onClick={() => setZoomedProject(project)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setZoomedProject(project)}
+            aria-label={`Click to enlarge ${project.title}`}
+          >
+            <div className="project-card-glass">
+              {/* Top Banner Bar */}
+              <div className="project-top-row">
+                <div className="project-id-badge">
+                  <span className="id-tag text-highlight-pill">[ MOD_0{index + 1} ]</span>
                 </div>
 
-                <div className="pin-dots-indicator">
-                  {filteredProjects.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      className={`pin-dot ${i === activeIdx ? 'is-active' : ''}`}
-                      onClick={() => scrollToProject(i)}
-                      aria-label={`Jump to project ${i + 1}`}
-                    />
+                <div className="project-top-right-group">
+                  <span className="zoom-hint-badge">
+                    <Maximize2 size={11} /> <span>CLICK TO ZOOM</span>
+                  </span>
+                  <div className="project-badge-pill">
+                    <span className="project-badge-text">{project.badge}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Category & Title */}
+              <div className="project-heading-block">
+                <span className="project-category-tag">// {project.categoryLabel}</span>
+                <h3 className="project-main-title">{project.title}</h3>
+              </div>
+
+              {/* Description */}
+              <p className="project-desc-text">{project.description}</p>
+
+              {/* Key Features */}
+              <div className="project-features-list">
+                <h5 className="features-header">
+                  <Sparkles size={13} /> [ KEY HIGHLIGHTS ]
+                </h5>
+                <div className="features-grid">
+                  {project.features.map((feat, fIdx) => (
+                    <div key={fIdx} className="feature-bullet">
+                      <CheckCircle2 size={13} className="feature-check" />
+                      <span>{feat}</span>
+                    </div>
                   ))}
                 </div>
+              </div>
 
-                <div className="pin-arrow-btns">
+              {/* Technologies */}
+              <div className="project-tech-stack">
+                <span className="tech-stack-label">STACK:</span>
+                <div className="tech-stack-tags">
+                  {project.technologies.map((tech, tIdx) => (
+                    <span key={tIdx} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Actions */}
+              <div className="project-footer-actions" onClick={(e) => e.stopPropagation()}>
+                {project.featured ? (
                   <button
                     type="button"
-                    className="pin-arrow-btn"
-                    onClick={handlePrev}
-                    disabled={activeIdx === 0}
-                    aria-label="Previous project"
+                    className="btn-solid-white-sm"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      if (onCaseStudy) {
+                        onCaseStudy()
+                      }
+                    }}
                   >
-                    <ChevronLeft size={16} />
+                    <span>READ CASE STUDY</span>
+                    <ArrowUpRight size={15} />
                   </button>
-                  <button
-                    type="button"
-                    className="pin-arrow-btn"
-                    onClick={handleNext}
-                    disabled={activeIdx === filteredProjects.length - 1}
-                    aria-label="Next project"
+                ) : (
+                  <a
+                    href="#home"
+                    className="btn-outline-box-sm"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
                   >
-                    <ChevronRight size={16} />
-                  </button>
+                    <span>ACTIVE IN VIEW</span>
+                    <ArrowUpRight size={15} />
+                  </a>
+                )}
+
+                <div className="project-kpi-pill">
+                  <span className="kpi-dot" />
+                  <span>{project.stats}</span>
                 </div>
               </div>
             </div>
+          </TiltCard>
+        ))}
+      </div>
 
-            <div className="projects-meta-row">
-              <p className="section-subtitle">
-                Scroll down to travel through real-world applications and digital infrastructure engineered for high operational performance.
-              </p>
+      {/* ENLARGED PROJECT ZOOM MODAL */}
+      <CardModal
+        isOpen={!!zoomedProject}
+        onClose={() => setZoomedProject(null)}
+        title={zoomedProject ? zoomedProject.title.toUpperCase() : 'PROJECT SPECIFICATION'}
+      >
+        {zoomedProject && (
+          <div className="modal-zoomed-card-content">
+            <div className="project-top-row">
+              <div className="project-id-badge">
+                <span className="id-tag text-highlight-pill">[ MOD_EXPANDED ]</span>
+              </div>
+              <div className="project-badge-pill">
+                <span className="project-badge-text">{zoomedProject.badge}</span>
+              </div>
+            </div>
 
-              {/* Category Filter buttons */}
-              <div className="projects-filter-bar">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    className={`project-filter-btn ${filter === cat.id ? 'active' : ''}`}
-                    onClick={() => {
-                      setFilter(cat.id)
-                      setActiveIdx(0)
-                    }}
-                  >
-                    <span>{cat.label}</span>
-                  </button>
+            <div className="project-heading-block">
+              <span className="project-category-tag">// {zoomedProject.categoryLabel}</span>
+              <h3 className="project-main-title">{zoomedProject.title}</h3>
+            </div>
+
+            <p className="project-desc-text">{zoomedProject.description}</p>
+
+            <div className="project-features-list">
+              <h5 className="features-header">
+                <Sparkles size={13} /> [ COMPLETE SPECIFICATIONS & HIGHLIGHTS ]
+              </h5>
+              <div className="features-grid">
+                {zoomedProject.features.map((feat, fIdx) => (
+                  <div key={fIdx} className="feature-bullet">
+                    <CheckCircle2 size={13} className="feature-check" />
+                    <span>{feat}</span>
+                  </div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Horizontal Sliding Track */}
-        <div className="projects-track-viewport">
-          <div
-            ref={trackRef}
-            className="projects-horizontal-track"
-            style={{
-              transform: isMobile ? 'none' : `translate3d(-${translateX}px, 0, 0)`,
-            }}
-          >
-            {filteredProjects.map((project, index) => (
-              <TiltCard
-                key={project.id}
-                className={`modern-project-card ${
-                  index === activeIdx ? 'is-active-project' : ''
-                } ${project.featured ? 'featured-highlight' : ''}`}
-                maxTilt={8}
-                scale={1.015}
-              >
-                <div className="project-card-glass">
-                  {/* Top Banner Bar */}
-                  <div className="project-top-row">
-                    <div className="project-id-badge">
-                      <span className="id-tag text-highlight-pill">[ MOD_0{index + 1} ]</span>
-                    </div>
+            <div className="project-tech-stack">
+              <span className="tech-stack-label">STACK:</span>
+              <div className="tech-stack-tags">
+                {zoomedProject.technologies.map((tech, tIdx) => (
+                  <span key={tIdx} className="tech-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-                    <div className="project-badge-pill">
-                      <span className="project-badge-text">{project.badge}</span>
-                    </div>
-                  </div>
-
-                  {/* Category & Title */}
-                  <div className="project-heading-block">
-                    <span className="project-category-tag">// {project.categoryLabel}</span>
-                    <h3 className="project-main-title">{project.title}</h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="project-desc-text">{project.description}</p>
-
-                  {/* Key Features */}
-                  <div className="project-features-list">
-                    <h5 className="features-header">
-                      <Sparkles size={13} /> [ KEY HIGHLIGHTS ]
-                    </h5>
-                    <div className="features-grid">
-                      {project.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="feature-bullet">
-                          <CheckCircle2 size={13} className="feature-check" />
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Technologies */}
-                  <div className="project-tech-stack">
-                    <span className="tech-stack-label">STACK:</span>
-                    <div className="tech-stack-tags">
-                      {project.technologies.map((tech, tIdx) => (
-                        <span key={tIdx} className="tech-tag">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom Actions */}
-                  <div className="project-footer-actions">
-                    {project.featured ? (
-                      <button
-                        className="btn-solid-white-sm"
-                        onClick={() => {
-                          if (onCaseStudy) {
-                            onCaseStudy()
-                          }
-                        }}
-                      >
-                        <span>READ CASE STUDY</span>
-                        <ArrowUpRight size={15} />
-                      </button>
-                    ) : (
-                      <a
-                        href="#home"
-                        className="btn-outline-box-sm"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }}
-                      >
-                        <span>ACTIVE IN VIEW</span>
-                        <ArrowUpRight size={15} />
-                      </a>
-                    )}
-
-                    <div className="project-kpi-pill">
-                      <span className="kpi-dot" />
-                      <span>{project.stats}</span>
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            ))}
-
-            {/* End of Track Visual Cue Card */}
-            <div className="projects-end-card">
-              <div className="end-card-inner">
-                <span className="end-card-tag">[ MORE IN ARCHIVE ]</span>
-                <h4>Want to see more system builds?</h4>
-                <p>Explore custom internal administrative tools and hardware diagnostic utilities.</p>
-                <a href="#contact" className="btn-solid-white-sm">
-                  <span>LET'S TALK</span>
-                  <ArrowRight size={14} />
-                </a>
+            <div className="modal-zoomed-footer-actions">
+              {zoomedProject.featured && (
+                <button
+                  type="button"
+                  className="btn-solid-white"
+                  onClick={() => {
+                    setZoomedProject(null)
+                    if (onCaseStudy) onCaseStudy()
+                  }}
+                >
+                  <span>OPEN FULL INTERACTIVE CASE STUDY</span>
+                  <ArrowUpRight size={16} />
+                </button>
+              )}
+              <div className="project-kpi-pill">
+                <span className="kpi-dot" />
+                <span>{zoomedProject.stats}</span>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Progress Bar at bottom of Pinned Frame */}
-        {!isMobile && (
-          <div className="projects-track-progress-bar" aria-hidden="true">
-            <div
-              className="projects-track-progress-fill"
-              style={{
-                transform: `scaleX(${scrollProgress})`,
-              }}
-            />
-          </div>
         )}
-      </div>
+      </CardModal>
     </section>
   )
 }

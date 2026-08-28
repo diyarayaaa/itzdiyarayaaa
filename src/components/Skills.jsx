@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import TiltCard from './TiltCard'
+import CardModal from './CardModal'
 import {
   Wrench,
   Network,
   Code2,
   Database,
   CheckCircle,
+  Maximize2,
 } from 'lucide-react'
 
 function Skills() {
   const [activeTab, setActiveTab] = useState('all')
+  const [zoomedSkill, setZoomedSkill] = useState(null)
 
   const categories = [
     { id: 'all', label: 'All Disciplines' },
@@ -22,7 +25,8 @@ function Skills() {
   const skillData = [
     {
       category: 'hardware',
-      title: <>IT Support &amp;<br />Hardware Engineering</>,
+      title: 'IT Support & Hardware Engineering',
+      titleJsx: <>IT Support &amp;<br />Hardware Engineering</>,
       icon: <Wrench size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'PC & Laptop Troubleshooting', level: 95 },
@@ -34,7 +38,8 @@ function Skills() {
     },
     {
       category: 'network',
-      title: <>Network Infrastructure</>,
+      title: 'Network Infrastructure',
+      titleJsx: <>Network Infrastructure</>,
       icon: <Network size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'LAN / WAN Architecture', level: 85 },
@@ -46,7 +51,8 @@ function Skills() {
     },
     {
       category: 'software',
-      title: <>Software &amp; Web<br /> Development</>,
+      title: 'Software & Web Development',
+      titleJsx: <>Software &amp; Web<br /> Development</>,
       icon: <Code2 size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'React.js & Modern JavaScript', level: 84 },
@@ -58,7 +64,8 @@ function Skills() {
     },
     {
       category: 'admin',
-      title: <>Systems &amp; Workflow<br />Administration</>,
+      title: 'Systems & Workflow Administration',
+      titleJsx: <>Systems &amp; Workflow<br />Administration</>,
       icon: <Database size={20} className="skill-cat-icon" />,
       skills: [
         { name: 'Google Sheets Advanced Formulas', level: 92 },
@@ -108,9 +115,14 @@ function Skills() {
         {filteredData.map((category, index) => (
           <TiltCard
             key={category.category}
-            className="skill-category-card"
-            maxTilt={10}
-            scale={1.02}
+            className="skill-category-card zoomable-interactive-card"
+            maxTilt={8}
+            scale={1.015}
+            onClick={() => setZoomedSkill(category)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setZoomedSkill(category)}
+            aria-label={`Click to enlarge ${category.title} discipline`}
           >
             <div className="skill-card-inner">
               {/* Header */}
@@ -119,8 +131,13 @@ function Skills() {
                   {category.icon}
                 </div>
                 <div className="skill-header-meta">
-                  <span className="skill-meta-label">[ DISCIPLINE 0{index + 1} ]</span>
-                  <h3 className="skill-card-title">{category.title}</h3>
+                  <div className="skill-meta-top-row">
+                    <span className="skill-meta-label">[ DISCIPLINE 0{index + 1} ]</span>
+                    <span className="zoom-hint-badge">
+                      <Maximize2 size={11} /> <span>ZOOM</span>
+                    </span>
+                  </div>
+                  <h3 className="skill-card-title">{category.titleJsx}</h3>
                 </div>
               </div>
 
@@ -155,6 +172,53 @@ function Skills() {
           </TiltCard>
         ))}
       </div>
+
+      {/* ENLARGED SKILL ZOOM MODAL */}
+      <CardModal
+        isOpen={!!zoomedSkill}
+        onClose={() => setZoomedSkill(null)}
+        title={zoomedSkill ? zoomedSkill.title.toUpperCase() : 'SKILL SPECIFICATION'}
+      >
+        {zoomedSkill && (
+          <div className="modal-zoomed-card-content">
+            <div className="skill-card-header">
+              <div className="skill-icon-bubble">
+                {zoomedSkill.icon}
+              </div>
+              <div className="skill-header-meta">
+                <span className="skill-meta-label">[ VERIFIED TECHNICAL DISCIPLINE ]</span>
+                <h3 className="skill-card-title">{zoomedSkill.title}</h3>
+              </div>
+            </div>
+
+            <div className="skill-bars-list">
+              {zoomedSkill.skills.map((skill, sIdx) => (
+                <div key={sIdx} className="skill-meter-row">
+                  <div className="skill-meter-label">
+                    <span className="skill-name">{skill.name}</span>
+                    <span className="skill-percent-badge text-highlight-pill">{skill.level}%</span>
+                  </div>
+                  <div className="skill-meter-track">
+                    <div
+                      className="skill-meter-fill"
+                      style={{
+                        '--skill-target': `${skill.level}%`,
+                        width: `${skill.level}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="skill-card-footer">
+              <span className="skill-chip-tag">
+                <CheckCircle size={12} /> [ OFFICIALLY VERIFIED PRODUCTION SKILL SET ]
+              </span>
+            </div>
+          </div>
+        )}
+      </CardModal>
     </section>
   )
 }
